@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:43:49 by salimon           #+#    #+#             */
-/*   Updated: 2021/01/15 16:11:12 by salimon          ###   ########.fr       */
+/*   Updated: 2021/01/21 13:10:28 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*res;
 
 	i = 0;
-	if (!s || !(res = malloc(sizeof(char) * ft_strlen(s) + 1)))
+	if (!s || !(res = ft_strdup(s)))
 		return (NULL);
 	if (!f)
 		return (ft_strdup(s));
-	res = ft_strdup(s);
 	while (res[i])
 	{
 		res[i] = (*f)(i, s[i]);
