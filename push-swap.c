@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:07 by salimon           #+#    #+#             */
-/*   Updated: 2021/05/23 04:45:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/25 05:19:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void    push_swap()
     while (!(sorted()))
 }
 
-int main(char *argv, int argc)
+int main(int argc, char **argv)
 {
-
+	
     //LIRE LES ARGS ET CHECK LES ERREURS
-    if (/*error : param non int ou doublon et si instructions n'existent pas pour bonus*/)
-        write (1, "Error\n", 6);
-
+    if (check_error(argv, argc))
+		return (0);
     //PLACER LES ARGUMENTS DANS A
+	init(t_);
     //ANALYSER A
     //TRIER
+	return (0);
 }

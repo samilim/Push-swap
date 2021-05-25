@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_and_reverse.c                               :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 05:37:37 by user42            #+#    #+#             */
-/*   Updated: 2021/05/23 05:56:48 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/25 05:14:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push-swap.h"
 
-void    ft_ra(t_pile_a **a)
+void    ft_ra(t_stack_a **a)
 {
-	ft_lstadd_back(**a, *a);
+	int tmp;
+	tmp = *a;
+	ft_lstlast(**a), *a));
+	ft_lstdelone(*a, (*del));
 	write(1, "ra\n", 3);
 }
 
-void    ft_rb(t_pile_b **b)
+void    ft_rb(t_stack_b **b)
 {
 	write(1, "rb\n", 3);
 }
-

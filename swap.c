@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting.c                                          :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 17:57:16 by salimon           #+#    #+#             */
-/*   Updated: 2021/05/23 05:34:48 by user42           ###   ########.fr       */
+/*   Created: 2021/05/25 04:15:03 by user42            #+#    #+#             */
+/*   Updated: 2021/05/25 05:07:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push-swap.h"
 
-void	ft_pa(t_pile_a **a, t_pile_b **b)
-{
-	if (*b)
-		*a = *b;
-	write(1, "pa\n", 3);
-}
-
-void	ft_pb(t_pile_a **a, t_pile_b **b)
-{
-    if (*a)
-        *b = *a;
-	write(1, "pb\n", 3);
-}
-
-void	ft_sa(t_pile_a **a)
+void	ft_sa(t_stack_a **a)
 {
 	int	tmp;
 
@@ -39,7 +25,7 @@ void	ft_sa(t_pile_a **a)
 	write(1, "sa\n", 3);
 }
 
-void	ft_sb(t_pile_a **b)
+void	ft_sb(t_stack_a **b)
 {
 	int	tmp;
 
@@ -52,7 +38,7 @@ void	ft_sb(t_pile_a **b)
 	write(1, "sb\n", 3);
 }
 
-void	ft_ss(t_pile_a **a, t_pile_b **b)
+void	ft_ss(t_stack_a **a, t_stack_b **b)
 {
 	if ((*a && (*a)->next) && (*b && (*b)->next)) //chck ici?
 	{
