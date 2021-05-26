@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:07 by salimon           #+#    #+#             */
-/*   Updated: 2021/05/26 02:43:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/26 06:29:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,42 @@ void	init_a(t_stack_a **a, int *tab_args)
 
 void    push_swap()
 {
-    while (!(sorted()))
+    //while (!(sorted()))
 }
 
 int main(int argc, char **argv)
 {
-	t_stack_a a;
-	t_stack_b b;
+	t_stack_a **a;
+	t_stack_b **b;
 	int	*tab_args;
-	
-    if (check_error(argv, argc))
-		return (0);
+
+	//LIRE LES ARGS ET CHECK LES ERREURS
+	if (check_not_integer(argc, argv))
+	{
+
+	}
+	//atoi les args
 	tab_args = atoi_args(argc, argv);
+    if (check_duplicate(tab_args))
+	{
+		write (1, "Error\n", 6);
+		return (0);
+	}
+
+	//PLACER LES ARGUMENTS DANS A
 	init_a(a, tab_args);
-	free(tab_args);
+
+
+	//ANALYSER A (voir quelle strat adopter)
+	//TRIER (appliquer la strat)
+	push_swap(a, b);
+	
+	//free
+	ft_free_tab(tab_args);
 	ft_lstclear(a);
 	ft_lstclear(b);
 	return (0);
 }
 
-//LIRE LES ARGS ET CHECK LES ERREURS
-//atoi les args
-//PLACER LES ARGUMENTS DANS A
-//ANALYSER A
-//TRIER
-//free
+
+
