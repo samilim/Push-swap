@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:55:42 by salimon           #+#    #+#             */
-/*   Updated: 2021/05/25 05:08:03 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/26 02:10:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@
 
 typedef struct		s_stack_a
 {
-    void			*content;
+    int			        elem;
     struct s_stack_a	*next;
 
 }					t_stack_a;
 
 typedef struct		s_stack_b
 {
-	void			*content;
+	int					elem;
     struct s_stack_b	*next;
 }					t_stack_b;
-
 
 #endif
