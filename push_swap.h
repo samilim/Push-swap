@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2021/07/12 01:19:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/07/13 02:20:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,48 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct		s_stack_a
+/* 
+** Structure de données des éléments
+*/
+
+typedef struct      s_elem
 {
-    int			        elem;
-    struct s_stack_a	*next;
+	int nb;
+	struct s_elem	*prev;
+	struct s_elem	*next;
+}					t_elem;
 
-}					t_stack_a;
+/*
+** Structure de données des stacks
+*/
 
-typedef struct		s_stack_b
+typedef struct      s_content
 {
-	int					elem;
-    struct s_stack_b	*next;
-}					t_stack_b;
+	t_elem	*first;
+	t_elem	*last;
+	int size;
+	int	mediane;
+}                   t_content;
 
+/*
+** Structure des stacks
+*/
+
+typedef struct		s_stacks
+{
+    t_content a;
+    t_content b;
+    int       size;
+}					t_stacks;
+
+t_stacks stacks;
+init_stacks(&stacks);
+stacks.a.first->nb;
+
+int	a;
+int	*b;
+
+a = 42;
+*b = 42;
 
 #endif
