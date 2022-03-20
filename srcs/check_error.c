@@ -6,11 +6,19 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 14:18:57 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 14:27:37 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int		found_dup(int *save, int nb)
+{
+	while (*save)
+		if (*save == nb)
+			return (1);
+	return (0);
+}
 
 int		check_duplicates(int *tab_nb)
 {
@@ -31,15 +39,14 @@ int		check_duplicates(int *tab_nb)
 	return (0);
 }
 
-int		check_not_integer(int argc, char **argv)
+int		check_not_integer(t_datas *datas)
 {
 	
-
 }
 
-int		check_error(int argc, char **argv)
+int		check_error(t_datas *datas)
 {
-	if (check_duplicates(argv, argc) || check_not_integer(argv, argc))
+	if (check_duplicates(datas->tab) || check_not_integer(datas/*->tab ou check version str*/))
 	{
 		return (1);
 	return (0);

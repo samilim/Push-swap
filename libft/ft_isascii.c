@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/23 05:37:37 by user42            #+#    #+#             */
-/*   Updated: 2021/05/25 05:14:27 by user42           ###   ########.fr       */
+/*   Created: 2021/01/08 17:38:16 by salimon           #+#    #+#             */
+/*   Updated: 2021/12/12 03:31:24 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push-swap.h"
-
-void    ft_ra(t_stack_a **a)
+int	ft_isascii(int c)
 {
-	int tmp;
-	tmp = *a;
-	ft_lstlast(**a), *a));
-	ft_lstdelone(*a, (*del));
-	write(1, "ra\n", 3);
-}
-
-void    ft_rb(t_stack_b **b)
-{
-	write(1, "rb\n", 3);
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
 }

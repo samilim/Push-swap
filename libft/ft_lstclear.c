@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 17:57:16 by salimon           #+#    #+#             */
-/*   Updated: 2021/05/25 05:07:31 by user42           ###   ########.fr       */
+/*   Created: 2021/01/12 18:04:13 by salimon           #+#    #+#             */
+/*   Updated: 2021/01/15 17:56:25 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push-swap.h"
+#include "libft.h"
 
-void	ft_pa(t_stack_a **a, t_stack_b **b)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	if (*b)
-		*a = *b;
-	write(1, "pa\n", 3);
-}
+	t_list	*tmp;
 
-void	ft_pb(t_stack_a **a, t_stack_b **b)
-{
-    if (*a)
-        *b = *a;
-	write(1, "pb\n", 3);
+	tmp = *lst;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, (del));
+		*lst = tmp;
+	}
+	*lst = NULL;
 }
-

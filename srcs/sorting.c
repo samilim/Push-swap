@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2021/05/25 05:32:43 by user42           ###   ########.fr       */
+/*   Updated: 2022/03/20 14:31:29 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push-swap.h"
+#include "../includes/push_swap.h"
 
 /*push b le plus petit nb puis adapter à partir de là
 /* grps de 3*/

@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 13:40:56 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 14:21:06 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
 
 /* 
 ** Structure de données des éléments
@@ -47,6 +48,11 @@ typedef struct		s_datas
 {
     t_stack a;
     t_stack b;
+	int		*tab;
+	int		argc;
+	char	**argv;
 }					t_datas;
+
+int		check_error(t_datas *datas);
 
 #endif

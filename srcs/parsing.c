@@ -6,11 +6,14 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2021/07/13 02:31:55 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 14:28:27 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
+
+
+/*vieux bulshit, ne pas lire*/
 
 int	*atoi_args(int argc, char **nbs)
 {

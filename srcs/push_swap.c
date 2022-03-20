@@ -6,18 +6,18 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 13:46:35 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 14:30:09 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-t_stacks	*empty_stack(void)
+void	*empty_stack(void)
 {
 	return (NULL);
 }
 
-void	init_a(int argc, t_stacks stacks, int *tab_args)
+void	init_a(t_stack *a, int *tab_args)
 {
 
 	while ()
@@ -31,28 +31,27 @@ void    push_swap()
 
 int		manage_args(int argc, char **argv, t_datas *datas)
 {
-	int	*tab_int;
 	int i;
 
 	i = 1;
-	if (argc == 2)
+	if (argc == 2) //cas str
 	{
-		if (check_error(argc, argv)) //check str (full int)
+		if (check_error(datas)) //check str (full int)
 			return (error_case());
-		tab_int = atoi_args(argc, ft_split(argv[1], ' '));
+		datas->tab = atoi_args(argc, ft_split(argv[1], ' '));
 	}
-	else
+	else //cas ints
 	{
-		if (check_error(argc, argv)) //check si full int
+		if (check_error(datas)) //check si full int
 			return (error_case());
-		tab_int = malloc(sizeof(int) * argc - 1); //mettre un \0 ou pas?
-		if (!tab_int)
+		datas->tab = malloc(sizeof(int) * argc - 1);
+		if (!(datas->tab))
 			return (error_case());
 		while (i < (argc - 1))
-			*tab_int++ = argv[i++];
+			*(datas->tab)++ = argv[i++];
 	}
-	init_a(a, tab_int);
-	free (tab_int);
+	init_a(datas->a, datas->tab);
+	free (datas->tab);
 	return (1);
 }
 
