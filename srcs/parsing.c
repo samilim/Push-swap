@@ -6,14 +6,16 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 14:28:27 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 14:51:57 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 
-/*vieux bulshit, ne pas lire*/
+/*
+** Donne le tableau d'it correspondant au cas str
+*/
 
 int	*atoi_args(int argc, char **nbs)
 {
@@ -37,6 +39,9 @@ int	*atoi_args(int argc, char **nbs)
 	}
 	return (tab_args);
 }
+
+
+/*explications de martin
 
 char **args = ft_split(argv[1]);
 //proteger le split
@@ -66,3 +71,4 @@ c++;
 
 int i = 2147483647 + 1
 i = -2147483648;
+*/

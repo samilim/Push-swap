@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 14:30:09 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 15:04:47 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	*empty_stack(void)
 
 void	init_a(t_stack *a, int *tab_args)
 {
-
-	while ()
+	
 	
 } 
 
@@ -50,7 +49,7 @@ int		manage_args(int argc, char **argv, t_datas *datas)
 		while (i < (argc - 1))
 			*(datas->tab)++ = argv[i++];
 	}
-	init_a(datas->a, datas->tab);
+	init_a(datas->&a, datas->tab);
 	free (datas->tab);
 	return (1);
 }
@@ -67,10 +66,7 @@ int main(int argc, char **argv)
 	//TRIER (appliquer la strat)
 	push_swap(&datas);
 	//free
-	ft_lstclear(a);
-	ft_lstclear(b);
+	// ft_lstclear(a);
+	// ft_lstclear(b);
 	return (0);
 }
-
-
-
