@@ -3,37 +3,48 @@ CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra
 AR 			= ar rcs
 RM			= rm -f
-IFLAGS		= -include push_swap.h
+# directories
+INC_PATH	:= includes
+SRCS_PATH	:= srcs
+BONUS_PATH	:= bonus
 
 SRCS 		= push_swap.c \
 			check_error.c \
 
 SRCS_BONUS				= push_swap_bonus.c \
 						check_error_bonus.c \
-						checker_bonus.c \
 
-SRCS_PATH	= srcs/
-INC_PATH	= includes
+# libft
+LIBFT_PATH	:= libft/
+LIBFT_LIB	= $(addprefix $(LIBFT_PATH),libft.a)
+LIBFT_INC	= -I ./libft
+LIBFT_LNK	= -L ./libft -l ft -l pthread
+
 OBJS		= $(SRCS:.c=.o)
 OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 
-all:		$(NAME)
+all:		$(LIBFT_LIB) $(NAME)
 
-%.o:		%.c
-			$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
+%.o: %.c	$(SRCS_PATH)/%.c
+			$(CC) $(CFLAGS) $(LIBFT_INC) -I $(INC_PATH) -o $@ -c $<
+
+$(LIBFT_LIB):
+	@make -C $(LIBFT_PATH)
 
 $(NAME):	$(OBJS)
-			$(AR) $(NAME) $(OBJS)
+			$(CC) $(OBJS) $(LIBFT_LNK) -o $(NAME)
 
-bonus:		$(OBJS) $(OBJS_BONUS)
-			$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
+bonus:		$(LIBFT_LIB) $(OBJS_BONUS)
+			$(CC) $(OBJS_BONUS) $(LIBFT_LNK) -o $(NAME)
 
 clean:
 			$(RM) $(OBJS) $(OBJS_BONUS)
+			make -C $(LIBFT_PATH) clean
 
 fclean:		clean
 			$(RM) $(NAME)
+			make -C $(LIBFT_PATH) fclean
 
 re:			fclean all
 
-.PHONY:		all re clean fclean
+.PHONY:		all re clean fclean bonus
