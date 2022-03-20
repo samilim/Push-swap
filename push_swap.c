@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2021/07/13 02:28:14 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 13:46:35 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    push_swap()
     //while (!(sorted()))
 }
 
-int		manage_args(int argc, char **argv, t_stacks stacks)
+int		manage_args(int argc, char **argv, t_datas *datas)
 {
 	int	*tab_int;
 	int i;
@@ -58,16 +58,15 @@ int		manage_args(int argc, char **argv, t_stacks stacks)
 
 int main(int argc, char **argv)
 {
-	t_stack_a **a;
-	t_stack_b **b;
-	
+	t_datas datas;
+
 	if (argc < 2)
 		return (error_case());
-	if (!manage_args(argc, argv, stacks))
+	if (!manage_args(argc, argv, &datas))
 		return (0);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
-	push_swap(a, b);
+	push_swap(&datas);
 	//free
 	ft_lstclear(a);
 	ft_lstclear(b);

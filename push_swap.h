@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2021/07/13 02:20:48 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/20 13:40:56 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,22 @@ typedef struct      s_elem
 ** Structure de données des stacks
 */
 
-typedef struct      s_content
+typedef struct      s_stack
 {
 	t_elem	*first;
 	t_elem	*last;
 	int size;
 	int	mediane;
-}                   t_content;
+}                   t_stack;
 
 /*
 ** Structure des stacks
 */
 
-typedef struct		s_stacks
+typedef struct		s_datas
 {
-    t_content a;
-    t_content b;
-    int       size;
-}					t_stacks;
-
-t_stacks stacks;
-init_stacks(&stacks);
-stacks.a.first->nb;
-
-int	a;
-int	*b;
-
-a = 42;
-*b = 42;
+    t_stack a;
+    t_stack b;
+}					t_datas;
 
 #endif
