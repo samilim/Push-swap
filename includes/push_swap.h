@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 14:21:06 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/24 08:18:13 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ typedef struct		s_datas
 }					t_datas;
 
 int		check_error(t_datas *datas);
+void	ft_pa(t_datas *datas);
 
 #endif

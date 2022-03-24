@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 15:04:47 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/24 08:16:42 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ void	*empty_stack(void)
 	return (NULL);
 }
 
-void	init_a(t_stack *a, int *tab_args)
+void	init_a(t_datas *datas)
 {
-	
-	
+	unsigned int i;
+
+	i = 0;
+	//malloc struct?
+	while (datas->tab[i])
+	{
+		datas->
+	}
 } 
 
 void    push_swap()
@@ -49,7 +55,7 @@ int		manage_args(int argc, char **argv, t_datas *datas)
 		while (i < (argc - 1))
 			*(datas->tab)++ = argv[i++];
 	}
-	init_a(datas->&a, datas->tab);
+	init_a(&datas);
 	free (datas->tab);
 	return (1);
 }
@@ -58,15 +64,18 @@ int main(int argc, char **argv)
 {
 	t_datas datas;
 
-	if (argc < 2)
-		return (error_case());
-	if (!manage_args(argc, argv, &datas))
-		return (0);
-	//ANALYSER A (voir quelle strat adopter)
-	//TRIER (appliquer la strat)
-	push_swap(&datas);
-	//free
-	// ft_lstclear(a);
-	// ft_lstclear(b);
+	init_a(&datas);
+	ft_pa(&datas);
+
+// 	if (argc < 2)
+// 		return (error_case());
+// 	if (!manage_args(argc, argv, &datas))
+// 		return (0);
+// 	//ANALYSER A (voir quelle strat adopter)
+// 	//TRIER (appliquer la strat)
+// 	push_swap(&datas);
+// 	//free
+// 	// ft_lstclear(a);
+// 	// ft_lstclear(b);
 	return (0);
 }

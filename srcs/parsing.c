@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 14:51:57 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/24 07:53:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	*atoi_args(int argc, char **nbs)
 	return (tab_args);
 }
 
-
-/*explications de martin
+/*
+explications de martin
 
 char **args = ft_split(argv[1]);
 //proteger le split
@@ -65,7 +65,7 @@ while (i < argcount)
 		underflow;	
 }
 
-char -> [-128, 127];
+char -> [-128, 127];00
 char c = 127;
 c++;
 

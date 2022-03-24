@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/03/20 14:27:37 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/24 07:05:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		check_not_integer(t_datas *datas)
 int		check_error(t_datas *datas)
 {
 	if (check_duplicates(datas->tab) || check_not_integer(datas/*->tab ou check version str*/))
-	{
 		return (1);
 	return (0);
 //error : param non int ou doublon et si instructions n'existent pas pour bonus
