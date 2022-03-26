@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/03/26 01:17:15 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/26 07:13:11 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct		s_datas
 	char	**argv;
 }					t_datas;
 
-int		check_error(t_datas *datas);
+int		check_error(t_datas *datas, unsigned int type_arg);
 void	ft_pa(t_datas *datas);
 
 #endif

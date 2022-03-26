@@ -6,11 +6,13 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 17:57:16 by salimon           #+#    #+#             */
-/*   Updated: 2022/03/24 08:18:30 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/26 07:50:19 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+// bullshit
 
 void	ft_pa(t_datas *datas)
 {

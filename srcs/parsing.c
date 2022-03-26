@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2022/03/24 07:53:48 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/26 07:43:11 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 /*
-** Donne le tableau d'it correspondant au cas str
+** Returns the int tab corresponding from the sr parameter
 */
 
 int	*atoi_args(int argc, char **nbs)

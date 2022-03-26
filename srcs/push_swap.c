@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/26 01:22:26 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/26 07:51:13 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	*empty_stack(void)
 	return (NULL);
 }
 
-/* Given a reference (pointer to pointer) to the head
-   of a DLL and an int, appends a new node at the end  */
+/* 
+	Push all int in the tab in a
+	Given a reference (pointer to pointer) to the head
+	of a DLL and an int, appends a new node at the end  */
 void	init_a(t_datas *datas)
 {
+	datas->a.head = NULL;
 	/* 1. allocate node */
     struct t_elem* new_node;
     new_node = malloc(sizeof(t_elem));
@@ -28,7 +31,7 @@ void	init_a(t_datas *datas)
     struct t_elem* last = datas->a.head; /* used in step 5*/
  
     /* 2. put in the data  */
-    new_node->nb = datas->tab[0];
+    new_node.nb = datas->tab[0];
  
     /* 3. This new node is going to be the last node, so
           make next of it as NULL*/
@@ -66,41 +69,38 @@ int		manage_args(int argc, char **argv, t_datas *datas)
 	i = 1;
 	if (argc == 2) //cas str
 	{
-		if (check_error(datas)) //check str (full int)
-			return (error_case());
-		datas->tab = atoi_args(argc, ft_split(argv[1], ' '));
+		if (check_error(datas, 1)) //check si str full chiffres
+			return (error_case(3));
+		datas->tab = atoi_args(argc, ft_split(argv[1], ' ')); // fragmente la str et place les int dans un tab d'int
 	}
-	else //cas ints
+	else //cas ints ; place tous les arguments dans un tableau d'int
 	{
-		if (check_error(datas)) //check si full int
-			return (error_case());
 		datas->tab = malloc(sizeof(int) * argc - 1);
 		if (!(datas->tab))
-			return (error_case());
+			return (error_case(4));
 		while (i < (argc - 1))
 			*(datas->tab)++ = argv[i++];
 	}
-	init_a(&datas);
+	if (check_error(datas, 2)) //check si full int
+		return (error_case(2));
+	init_a(datas);
 	free (datas->tab);
-	return (1);
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
 	t_datas datas;
-	
-	datas.a.head = NULL;
-	datas.b.head = NULL;
-	init_a(&datas);
-	ft_pa(&datas);
 
-// 	if (argc < 2)
-// 		return (error_case());
-// 	if (!manage_args(argc, argv, &datas))
-// 		return (0);
-// 	//ANALYSER A (voir quelle strat adopter)
-// 	//TRIER (appliquer la strat)
-// 	push_swap(&datas);
-// 	//free
+	if (argc < 2)
+		return (error_case(1));
+	if (manage_args(argc, argv, &datas) > 0)
+		return (1);
+	//datas.b.head = NULL;
+	ft_pa(&datas);
+	//ANALYSER A (voir quelle strat adopter)
+	//TRIER (appliquer la strat)
+	//push_swap(&datas);
+	//free
 	return (0);
 }
