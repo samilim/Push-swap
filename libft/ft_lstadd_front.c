@@ -6,13 +6,13 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 16:35:16 by salimon           #+#    #+#             */
-/*   Updated: 2021/01/12 18:02:15 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/25 22:40:39 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void	ft_lstadd_front(t_node **alst, t_node *new)
 {
 	new->next = *alst;
 	*alst = new;

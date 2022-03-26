@@ -6,13 +6,13 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:07:45 by salimon           #+#    #+#             */
-/*   Updated: 2021/01/15 19:01:06 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/25 22:40:18 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	ft_lstdelone(t_node *lst, void (*del)(void*))
 {
 	(*del)(lst->content);
 	free(lst);

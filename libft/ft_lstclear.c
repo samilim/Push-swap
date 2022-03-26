@@ -6,15 +6,15 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:04:13 by salimon           #+#    #+#             */
-/*   Updated: 2021/01/15 17:56:25 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/25 22:40:28 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_node **lst, void (*del)(void*))
 {
-	t_list	*tmp;
+	t_node	*tmp;
 
 	tmp = *lst;
 	while (*lst)

@@ -6,13 +6,13 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 16:42:32 by salimon           #+#    #+#             */
-/*   Updated: 2021/12/12 03:40:13 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/25 22:39:36 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_node *lst)
 {
 	unsigned int	i;
 

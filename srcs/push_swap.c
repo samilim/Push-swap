@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/24 08:16:42 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/26 01:22:26 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,46 @@ void	*empty_stack(void)
 	return (NULL);
 }
 
+/* Given a reference (pointer to pointer) to the head
+   of a DLL and an int, appends a new node at the end  */
 void	init_a(t_datas *datas)
 {
-	unsigned int i;
-
-	i = 0;
-	//malloc struct?
-	while (datas->tab[i])
-	{
-		datas->
-	}
+	/* 1. allocate node */
+    struct t_elem* new_node;
+    new_node = malloc(sizeof(t_elem));
+ 
+    struct t_elem* last = datas->a.head; /* used in step 5*/
+ 
+    /* 2. put in the data  */
+    new_node->nb = datas->tab[0];
+ 
+    /* 3. This new node is going to be the last node, so
+          make next of it as NULL*/
+    new_node->next = NULL;
+ 
+    /* 4. If the Linked List is empty, then make the new
+          node as head */
+    if (*head_ref == NULL) {
+        new_node->prev = NULL;
+        *head_ref = new_node;
+        return;
+    }
+ 
+    /* 5. Else traverse till the last node */
+    while (last->next != NULL)
+        last = last->next;
+ 
+    /* 6. Change the next of last node */
+    last->next = new_node;
+ 
+    /* 7. Make last node as previous of new node */
+    new_node->prev = last;
+ 
+    return;
 } 
 
 void    push_swap()
 {
-    //while (!(sorted()))
 }
 
 int		manage_args(int argc, char **argv, t_datas *datas)
@@ -63,7 +88,9 @@ int		manage_args(int argc, char **argv, t_datas *datas)
 int main(int argc, char **argv)
 {
 	t_datas datas;
-
+	
+	datas.a.head = NULL;
+	datas.b.head = NULL;
 	init_a(&datas);
 	ft_pa(&datas);
 
@@ -75,7 +102,5 @@ int main(int argc, char **argv)
 // 	//TRIER (appliquer la strat)
 // 	push_swap(&datas);
 // 	//free
-// 	// ft_lstclear(a);
-// 	// ft_lstclear(b);
 	return (0);
 }
