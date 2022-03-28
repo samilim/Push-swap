@@ -75,7 +75,7 @@ void append(struct Node** head_ref, int new_data)
     struct Node* new_node
         = (struct Node*)malloc(sizeof(struct Node));
  
-    struct Node* last = *head_ref; /* used in step 5*/
+    struct Node* last = *head_ref; /* used in step 5
  
     /* 2. put in the data  */
     new_node->data = new_data;

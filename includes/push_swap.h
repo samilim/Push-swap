@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/03/26 07:13:11 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/28 00:32:36 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct      s_elem
 
 typedef struct      s_stack
 {
-	struct s_elem	**head;
-	struct s_elem	**last;
+	struct s_elem	*head; //**
+	struct s_elem	*last;
 	int size;
 	int	mediane;
 }                   t_stack;

@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/26 07:51:13 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/28 05:12:45 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,38 @@ void	init_a(t_datas *datas)
 {
 	datas->a.head = NULL;
 	/* 1. allocate node */
-    struct t_elem* new_node;
-    new_node = malloc(sizeof(t_elem));
+    struct s_elem	*new_node;
+    new_node = (struct t_elem*)malloc(sizeof(struct s_elem));
  
-    struct t_elem* last = datas->a.head; /* used in step 5*/
+    datas->a.last = datas->a.head; /* used in step 5*/
  
     /* 2. put in the data  */
-    new_node.nb = datas->tab[0];
- 
+    new_node->nb = datas->tab[0];
+
     /* 3. This new node is going to be the last node, so
           make next of it as NULL*/
     new_node->next = NULL;
  
     /* 4. If the Linked List is empty, then make the new
           node as head */
-    if (*head_ref == NULL) {
+    if (datas->a.head == NULL)
+	{
         new_node->prev = NULL;
-        *head_ref = new_node;
+        datas->a.head = new_node;
         return;
     }
  
     /* 5. Else traverse till the last node */
-    while (last->next != NULL)
-        last = last->next;
+    while (datas->a.last->next != NULL)
+        datas->a.last = datas->a.last->next;
  
     /* 6. Change the next of last node */
-    last->next = new_node;
+    datas->a.last->next = new_node;
  
     /* 7. Make last node as previous of new node */
-    new_node->prev = last;
- 
+    new_node->prev = datas->a.last;
     return;
-} 
+}
 
 void    push_swap()
 {
@@ -65,6 +65,7 @@ void    push_swap()
 int		manage_args(int argc, char **argv, t_datas *datas)
 {
 	int i;
+	struct t_elem* head = NULL;
 
 	i = 1;
 	if (argc == 2) //cas str
@@ -83,7 +84,6 @@ int		manage_args(int argc, char **argv, t_datas *datas)
 	}
 	if (check_error(datas, 2)) //check si full int
 		return (error_case(2));
-	init_a(datas);
 	free (datas->tab);
 	return (0);
 }
