@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/03/31 06:37:39 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/31 07:46:27 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	check_error(t_datas *datas, unsigned int type_arg)
 		// 	i++;
 		// }
 	}
-	else if (check_duplicates(datas->tab) == 1 || check_not_integer(datas->tab) == 1)
-		return (2);
+	// else if (check_duplicates(datas->tab) == 1 || check_not_integer(datas->tab) == 1)
+	// 	return (2);
 	return (0);
 }

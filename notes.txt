@@ -3,9 +3,14 @@ questions :
 - gerer les espaces en trop ?
 
 etapes :
+--
 leaks parsing
 gerer overflow
+--
 init stack
+--
 operations
+--
 algo de tri
+--
 bonus

@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/31 06:48:18 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/31 07:59:39 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 {
 	int i;
 	int j;
-	char **tab;
+	//char **tab;
 	//struct t_elem* head = NULL;
 
 	j = 0;
@@ -73,17 +73,20 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 	datas->argv = argv;
 	if (argc == 2) //cas str
 	{
-		tab = ft_split(datas->argv[1], ' ');
-		printf("\ncas str\n");
-		if (check_error(datas, 1) > 0) //check si str full chiffres et pas d'espaces en trop (ou gerer les espaces dams count elem)
-			return (error_case(3));
-		printf("pas d'erreur\n");
-		datas->tab = atoi_args(tab); // fragmente la str et place les int dans un tab d'int
-		if (!datas->tab)
-			return (error_case(4));
-		while(*tab)
-			free(*tab++);
-		free (*tab);
+		// tab = ft_split(datas->argv[1], ' ');
+		// if (!tab)
+		// 	return (error_case(4));
+		// printf("\ncas str\n");
+		// if (check_error(datas, 1) > 0) //check si str full chiffres et pas d'espaces en trop (ou gerer les espaces dams count elem)
+		// 	return (error_case(3));
+		// printf("pas d'erreur\n");
+		// datas->tab = atoi_args(tab); // fragmente la str et place les int dans un tab d'int
+		// if (!datas->tab)
+		// 	return (error_case(4));
+		// while(*tab)
+		// 	free(*tab++);
+		// if (*tab)
+		// 	free (*tab);
 	}
 	else //cas ints ; place tous les arguments dans un tableau d'int
 	{
@@ -119,7 +122,8 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 	printf("last check error\n");
 	if (check_error(datas, 2) > 0) //check si full int et doublons
 		return (error_case(2));
-	free (datas->tab);
+	if (datas->tab)
+		free (datas->tab);
 	return (0);
 }
 
@@ -143,7 +147,7 @@ int	main(int argc, char **argv)
 		return (error_case(1));
 	if (manage_args(argc, argv, &datas) > 0)
 		return (1);
-	//datas.b.head = NULL;
+	//datas.b.head = NULL;y
 	//init_a(&datas);
 	//printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
