@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/31 02:14:02 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/31 06:48:18 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,61 @@ void	push_swap()
 int	manage_args(int argc, char **argv, t_datas *datas)
 {
 	int i;
+	int j;
+	char **tab;
 	//struct t_elem* head = NULL;
 
-	i = 1;
+	j = 0;
+	i = 0;
+	datas->argc = argc;
+	datas->argv = argv;
 	if (argc == 2) //cas str
 	{
-		printf("cas str\n");
+		tab = ft_split(datas->argv[1], ' ');
+		printf("\ncas str\n");
 		if (check_error(datas, 1) > 0) //check si str full chiffres et pas d'espaces en trop (ou gerer les espaces dams count elem)
 			return (error_case(3));
 		printf("pas d'erreur\n");
-		datas->tab = atoi_args(datas, ft_split(argv[1], ' ')); // fragmente la str et place les int dans un tab d'int
+		datas->tab = atoi_args(tab); // fragmente la str et place les int dans un tab d'int
+		if (!datas->tab)
+			return (error_case(4));
+		while(*tab)
+			free(*tab++);
+		free (*tab);
 	}
 	else //cas ints ; place tous les arguments dans un tableau d'int
 	{
-		printf("cas ints");
-		datas->tab = malloc(sizeof(int) * argc - 1);
+		j = 0;
+		i = 1;
+		printf("\ncas ints\n");
+		//check fll int avant tab
+		while (i < (datas->argc))
+		{
+			j = 0;
+			if (datas->argv[i][j] == '-') //gerer +?
+				j++;
+			while (datas->argv[i][j])
+			{
+				printf("digit ? %s\n", &datas->argv[i][j]);
+				//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
+				if (!ft_isdigit(datas->argv[i][j]))
+					return (error_case(3));
+				j++;
+			}
+			i++;
+		}
+		j = 0;
+		datas->tab = malloc(sizeof(int) * (datas->argc - 1));
 		if (!(datas->tab))
 			return (error_case(4));
-		while (i < (argc - 1))
-			*(datas->tab)++ = ft_atoi(argv[i++]);
+		while (j < (datas->argc - 1))
+		{
+			datas->tab[j] = ft_atoi(datas->argv[j + 1]);
+			j++;
+		}
 	}
 	printf("last check error\n");
-	if (check_error(datas, 2)) //check si full int
+	if (check_error(datas, 2) > 0) //check si full int et doublons
 		return (error_case(2));
 	free (datas->tab);
 	return (0);
@@ -111,11 +144,10 @@ int	main(int argc, char **argv)
 	if (manage_args(argc, argv, &datas) > 0)
 		return (1);
 	//datas.b.head = NULL;
-	init_a(&datas);
-	printstack(&datas);
+	//init_a(&datas);
+	//printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
-	//push_swap (&datas);
 	//free
 	return (0);
 }
