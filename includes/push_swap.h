@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/03/28 00:32:36 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/31 01:54:13 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 
 /* 
@@ -54,7 +55,8 @@ typedef struct		s_datas
 }					t_datas;
 
 int		check_error(t_datas *datas, unsigned int type_arg);
+int		error_case(unsigned int error_code);
+int		*atoi_args(t_datas *datas, char **nbs);
 void	ft_pa(t_datas *datas);
 
 #endif
-yassharm

@@ -6,18 +6,28 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2022/03/26 07:43:11 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/31 02:05:46 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int	count_elem(char **nbs)
+{
+	int i;
+
+	i = 0;
+	while (nbs[i])
+		i++;
+	return (i);
+}
 
 
 /*
 ** Returns the int tab corresponding from the sr parameter
 */
 
-int	*atoi_args(int argc, char **nbs)
+int	*atoi_args(t_datas *datas, char **nbs)
 {
 	int i;
 	int j;
@@ -26,16 +36,16 @@ int	*atoi_args(int argc, char **nbs)
 
 	i = 0;
 	j = 0;
-	nb_elem = ft_count_elem();
+	nb_elem = count_elem(nbs);
 	tab_args = malloc(sizeof(int) * nb_elem);
 	if (!tab_args)
 		return (0);
-	while(argc > 0)
+	while(datas->argc > 0)
 	{
 		tab_args[j] = ft_atoi(nbs[i]);
 		i++;
 		j++;
-		argc--;
+		datas->argc--;
 	}
 	return (tab_args);
 }

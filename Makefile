@@ -8,8 +8,9 @@ INC_PATH	:= includes
 SRCS_PATH	:= srcs
 BONUS_PATH	:= bonus
 
-SRCS 		= push_swap.c \
-			check_error.c \
+SRCS 		= srcs/push_swap.c \
+			srcs/check_error.c \
+			srcs/parsing.c \
 
 SRCS_BONUS				= push_swap_bonus.c \
 						check_error_bonus.c \

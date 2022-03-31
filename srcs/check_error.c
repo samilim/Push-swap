@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/03/26 07:41:30 by salimon          ###   ########.fr       */
+/*   Updated: 2022/03/31 01:49:30 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,33 @@ int	found_dup(int *save, int nb)
 	return (0);
 }
 
+int	*ft_intabdup(int *tab)
+{
+	int	*dest;
+	int		len;
+	int		i;
+
+	len = 0;
+	i = 0;
+	while (tab[len])
+		len++;
+	dest = malloc(sizeof(char) * len);
+	if (!dest)
+		return (0);
+	while (tab[i])
+	{
+		dest[i] = tab[i];
+		i++;
+	}
+	return (dest);
+}
+
 int	check_duplicates(int *tab_nb)
 {
 	int		*save;
 	int		i;
 
-	save = ft_strdup(tab_nb);
+	save = ft_intabdup(tab_nb);
 	while (tab_nb[i])
 	{
 		if (found_dup(save, tab_nb[i]) == 1)
@@ -58,7 +79,7 @@ int	check_not_integer(int *tab_nb)
 {
 	while (*tab_nb++)
 	{
-		if (*tab_nb < -2147483648 || *tab_nb > 2147483647)
+		if (*tab_nb <= -2147483648 || *tab_nb >= 2147483647)
 		{
 			write (STDERR_FILENO, "Found a non int argument\n", 26);
 			return (1);
