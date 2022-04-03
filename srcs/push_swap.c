@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/03/31 07:59:39 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/03 22:38:54 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_a(t_datas *datas)
 	/* 1. allocate node */
 	struct s_elem*	new_node;
 	new_node = (struct s_elem*)malloc(sizeof(struct s_elem));
+	if(new_node == NULL)
+		return/**/;
 
 	datas->a.last = datas->a.head; /* used in step 5*/
 
@@ -58,13 +60,15 @@ void	init_a(t_datas *datas)
 
 void	push_swap()
 {
+
 }
 
 int	manage_args(int argc, char **argv, t_datas *datas)
 {
 	int i;
 	int j;
-	//char **tab;
+	int error;
+	char **tab;
 	//struct t_elem* head = NULL;
 
 	j = 0;
@@ -73,57 +77,66 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 	datas->argv = argv;
 	if (argc == 2) //cas str
 	{
-		// tab = ft_split(datas->argv[1], ' ');
-		// if (!tab)
-		// 	return (error_case(4));
-		// printf("\ncas str\n");
-		// if (check_error(datas, 1) > 0) //check si str full chiffres et pas d'espaces en trop (ou gerer les espaces dams count elem)
-		// 	return (error_case(3));
-		// printf("pas d'erreur\n");
-		// datas->tab = atoi_args(tab); // fragmente la str et place les int dans un tab d'int
-		// if (!datas->tab)
-		// 	return (error_case(4));
-		// while(*tab)
-		// 	free(*tab++);
-		// if (*tab)
-		// 	free (*tab);
+		tab = ft_split(datas->argv[1], ' ');
+		if (!tab)
+			return (4);
+		datas->nb_elem = count_elem(tab);
+		//printf("\ncas str\n");
+		error = check_error(datas, tab, 1);
+		if (error > 0) //check si str full chiffres et pas d'espaces en trop (ou gerer les espaces dams count elem)
+		{
+			free_matrice(tab);
+			return (error);
+		}
+		//printf("pas d'erreur\n");
+		datas->tab = atoi_args(datas, tab); // fragmente la str et place les int dans un tab d'int
+		if (!datas->tab)
+		{
+			free_matrice(tab);
+			return (4);
+		}
 	}
 	else //cas ints ; place tous les arguments dans un tableau d'int
 	{
+		datas->nb_elem = argc - 1;
 		j = 0;
 		i = 1;
-		printf("\ncas ints\n");
+		//printf("\ncas ints\n");
 		//check fll int avant tab
 		while (i < (datas->argc))
 		{
 			j = 0;
-			if (datas->argv[i][j] == '-') //gerer +?
+			if (datas->argv[i][j] == '-' || datas->argv[i][j] == '+') //gerer +?
 				j++;
 			while (datas->argv[i][j])
 			{
-				printf("digit ? %s\n", &datas->argv[i][j]);
+				//printf("digit ? %s\n", &datas->argv[i][j]);
 				//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
 				if (!ft_isdigit(datas->argv[i][j]))
-					return (error_case(3));
+					return (3);
 				j++;
 			}
 			i++;
 		}
 		j = 0;
-		datas->tab = malloc(sizeof(int) * (datas->argc - 1));
-		if (!(datas->tab))
-			return (error_case(4));
-		while (j < (datas->argc - 1))
-		{
-			datas->tab[j] = ft_atoi(datas->argv[j + 1]);
-			j++;
-		}
+		// datas->tab = malloc(sizeof(int) * (datas->argc - 1));
+		// if (!(datas->tab))
+		// 	return (error_case(4));
+		// while (j < (datas->argc - 1))
+		// {
+		// 	datas->tab[j] = ft_atoi(datas->argv[j + 1]);
+		// 	j++;
+		// }
 	}
-	printf("last check error\n");
-	if (check_error(datas, 2) > 0) //check si full int et doublons
-		return (error_case(2));
-	if (datas->tab)
-		free (datas->tab);
+	//printf("last check error\n");
+	error = check_error(datas, tab, 2);
+	if (error > 0) //check si full int et doublons
+	{
+		free_matrice(tab);
+		return (error);
+	}
+	free_matrice(tab);
+	free(datas->tab);
 	return (0);
 }
 
@@ -140,14 +153,17 @@ void printstack(t_datas	*datas)
 int	main(int argc, char **argv)
 {
 	t_datas datas;
+	int error;
 
-	printf("argc = %d\n", argc);
+	//printf("argc = %d\n", argc);
 
+	ft_memset(&datas, 0, sizeof(t_datas));
 	if (argc < 2)
-		return (error_case(1));
-	if (manage_args(argc, argv, &datas) > 0)
-		return (1);
-	//datas.b.head = NULL;y
+		return (error_case(&datas, 1));
+	error = manage_args(argc, argv, &datas);
+	if (error > 0 && error != 2)
+		return (error_case(&datas, error));
+	//datas.b.head = NULL;
 	//init_a(&datas);
 	//printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)

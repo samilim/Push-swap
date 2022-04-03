@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:25:14 by salimon           #+#    #+#             */
-/*   Updated: 2022/03/25 22:38:50 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/03 18:08:33 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_node
 
 void				*ft_memset(void *mem, int ch, size_t n);
 void				ft_bzero(void *mem, size_t n);
+void				free_matrice(char **tab);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memccpy(void *dest, const void *src, int ch, size_t n);
 void				*ft_memmove(void *dest, const void *src, size_t n);

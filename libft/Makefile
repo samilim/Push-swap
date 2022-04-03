@@ -6,6 +6,7 @@ RM			= rm -f
 IFLAGS		= -include libft.h
 
 SRCS 		= ft_bzero.c \
+			ft_freematrice.c \
 			ft_memset.c \
 			ft_memcpy.c \
 			ft_memccpy.c \
