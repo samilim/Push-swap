@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/03 22:38:54 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/04 00:00:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 	i = 0;
 	datas->argc = argc;
 	datas->argv = argv;
+	tab = NULL; //
 	if (argc == 2) //cas str
 	{
 		tab = ft_split(datas->argv[1], ' ');
@@ -119,23 +120,29 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 			i++;
 		}
 		j = 0;
-		// datas->tab = malloc(sizeof(int) * (datas->argc - 1));
-		// if (!(datas->tab))
-		// 	return (error_case(4));
-		// while (j < (datas->argc - 1))
-		// {
-		// 	datas->tab[j] = ft_atoi(datas->argv[j + 1]);
-		// 	j++;
-		// }
+		datas->tab = malloc(sizeof(int) * datas->nb_elem);
+		if (!(datas->tab))
+		{
+			if (tab != NULL)
+				free_matrice(tab);
+			return (error_case(datas, 4));
+		}
+		while (j < (datas->nb_elem))
+		{
+			datas->tab[j] = ft_atoll(datas->argv[j + 1]);
+			j++;
+		}
 	}
 	//printf("last check error\n");
 	error = check_error(datas, tab, 2);
 	if (error > 0) //check si full int et doublons
 	{
-		free_matrice(tab);
+		if (tab != NULL)//
+				free_matrice(tab);//
 		return (error);
 	}
-	free_matrice(tab);
+	if (tab != NULL)
+				free_matrice(tab);
 	free(datas->tab);
 	return (0);
 }
@@ -161,7 +168,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (error_case(&datas, 1));
 	error = manage_args(argc, argv, &datas);
-	if (error > 0 && error != 2)
+	if (error > 0 && error != 7)
 		return (error_case(&datas, error));
 	//datas.b.head = NULL;
 	//init_a(&datas);

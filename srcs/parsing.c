@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2022/04/03 22:40:00 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/03 23:40:02 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,52 +28,19 @@ int	count_elem(char **nbs)
 ** Returns the int tab corresponding from the sr parameter
 */
 
-int	*atoi_args(t_datas *datas, char **nbs)
+long long int	*atoi_args(t_datas *datas, char **nbs)
 {
 	int i;
-	int *tab_args;
+	long long int *tab_args;
 
 	i = 0;
-	tab_args = malloc(sizeof(int) * datas->nb_elem);
+	tab_args = malloc(sizeof(long long int) * datas->nb_elem);
 	if (!tab_args)
 		return (0);
 	while(i < datas->nb_elem)
 	{
-		tab_args[i] = ft_atoi(nbs[i]);
+		tab_args[i] = ft_atoll(nbs[i]);
 		i++;
 	}
 	return (tab_args);
 }
-
-/*
-explications de martin
-
-char **args = ft_split(argv[1]);
-//proteger le split
-int argcount = ft_argcount(args);
-int	i = 0;
-while (i < argcount)
-{
-	//on check les erreurs
-	if (ft_strcheck_each(args[i], &ft_isdigit) == 0)
-		error;
-	int negative = 0;
-	if (args[i][0] == '-')
-		negative = 1;
-	else
-		negative = 0;
-	int value;
-	value = ft_atoi(args[i]);
-	if (value < 0 && negative == 0)
-		overflow;
-	if (value > 0 && negative == 1)
-		underflow;	
-}
-
-char -> [-128, 127];00
-char c = 127;
-c++;
-
-int i = 2147483647 + 1
-i = -2147483648;
-*/

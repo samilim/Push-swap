@@ -19,3 +19,7 @@ bonus
 
 mallocs :
 datas->tab
+
+radix sort
+ruby -e "puts (1..100).to_a.shuffle"
+ARG="1 2 3" | ./push_swap $=ARG   (ajouter = pour eviter conflits sous zsh)

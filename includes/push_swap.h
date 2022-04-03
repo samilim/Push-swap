@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/03 20:57:44 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/03 23:39:10 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct		s_datas
 {
     t_stack a;
     t_stack b;
-	int		*tab;
+	long long int		*tab;
 	int		argc;
 	char	**argv;
 	int		nb_elem;
@@ -58,7 +58,7 @@ typedef struct		s_datas
 int		check_error(t_datas *datas, char **tab, unsigned int type_arg);
 int		count_elem(char **nbs);
 int		error_case(t_datas *datas, unsigned int error_code);
-int		*atoi_args(t_datas *datas, char **nbs);
+long long int		*atoi_args(t_datas *datas, char **nbs);
 void	ft_pa(t_datas *datas);
 
 #endif
