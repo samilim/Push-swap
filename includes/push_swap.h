@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 20:04:30 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 20:30:06 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ long long int		*atoi_args(t_datas *datas, char **nbs);
 void	push_swap(t_datas *datas);
 void	ft_pa(t_datas *datas);
 void	ft_pb(t_datas *datas);
+int append(t_datas *datas, struct s_elem** head_ref, struct s_elem** last_ref, long long int new_data);
+int push(struct s_elem** head_ref, long long int new_data);
 
 #endif

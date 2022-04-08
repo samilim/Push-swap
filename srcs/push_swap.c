@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 20:01:48 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 20:32:32 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int push(struct s_elem** head_ref, long long int new_data)
 
 /* Given a reference (pointer to pointer) to the head
    of a DLL and an int, appends a new node at the end  */
-int append(t_datas *datas, struct s_elem** head_ref, long long int new_data)
+int append(t_datas *datas, struct s_elem** head_ref, struct s_elem** last_ref, long long int new_data)
 {
     /* 1. allocate node */
     struct s_elem* new_node;
     new_node = (struct s_elem*)malloc(sizeof(struct s_elem));
 	if(new_node == NULL)
 		return (4);
-    datas->a.last = *head_ref; /* used in step 5*/
+    *last_ref = *head_ref; /* used in step 5*/
  
     /* 2. put in the data  */
     new_node->nb = new_data;
@@ -74,14 +74,14 @@ int append(t_datas *datas, struct s_elem** head_ref, long long int new_data)
     }
  
     /* 5. Else traverse till the last node */
-    while (datas->a.last->next != NULL)
+    while ((*last_ref)->next != NULL)
         datas->a.last = datas->a.last->next;
  
     /* 6. Change the next of last node */
-    datas->a.last->next = new_node;
+    (*last_ref)->next = new_node;
  
     /* 7. Make last node as previous of new node */
-    new_node->prev = datas->a.last;
+    new_node->prev = *last_ref;
     return (0);
 }
 
@@ -94,7 +94,7 @@ int	init_a(t_datas *datas)
 	int i;
 
 	i = datas->nb_elem - 1;
-	append(datas, &datas->a.head, datas->tab[i]);
+	append(datas, &datas->a.head, &datas->a.last, datas->tab[i]);
 	while (i > 0)
 	{
 		i--;
@@ -133,17 +133,23 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 
 void printstack(t_datas	*datas)
 {
-    printf("\nTraversal in forward direction (top to bottom of the list)\n");
+    printf("\na in forward direction (top to bottom of the list)\n");
     while (datas->a.head != NULL) {
         printf("%lld ", datas->a.head->nb);
         datas->a.last = datas->a.head;
         datas->a.head = datas->a.head->next;
     }
-	printf("\nTraversal in reverse direction \n");
+	printf("\na in reverse direction \n");
     while (datas->a.last != NULL) {
         printf("%lld ", datas->a.last->nb);
         datas->a.last = datas->a.last->prev;
 	}
+	printf("\nb in forward direction (top to bottom of the list)\n");
+    while (datas->b.head != NULL) {
+        printf("%lld ", datas->b.head->nb);
+        datas->b.last = datas->b.head;
+        datas->b.head = datas->b.head->next;
+    }
 }
 
 int	main(int argc, char **argv)
@@ -161,10 +167,10 @@ int	main(int argc, char **argv)
 	if (error > 0 && error != 7)
 		return (error_case(&datas, error));
 	init_a(&datas);
+	push_swap(&datas);
 	printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
-	//push_swap(&datas);
 	//free
 	free(datas.tab);
 	return (0);
