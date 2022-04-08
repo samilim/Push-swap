@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 17:32:52 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:11:27 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	check_not_integer(t_datas *datas)
 }
 
 /*
-** Check if the str parameter is contains only digits and chck the spacing
+** Check if the str parameter is contains only digits and chck the spacing (?)
 */
 
 int	check_str(t_datas *datas, char **tab)
@@ -143,9 +143,7 @@ int	check_str(t_datas *datas, char **tab)
 }
 
 /*
-** First condition is when the arg is a unique str.
-** It will check is there are only digit in the string.
-** Else it will check if 
+** Check if 
 ** the int tab created from the arguments 
 ** contain duplicates or over/underflows.
 */

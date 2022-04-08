@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 16:25:57 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:46:37 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,72 @@ long long int	*atoi_args(t_datas *datas, char **nbs)
 	return (tab_args);
 }
 
+int	case_arg_str(t_datas *datas)
+{
+	int error;
+	char **split_str;
+
+	//split_str = NULL;
+	split_str = ft_split(datas->argv[1], ' ');
+	if (!split_str)
+		return (4);
+	datas->nb_elem = count_elem(split_str);
+	//printf("\ncas str\n");
+	error = check_str(datas, split_str);
+	if (error > 0)
+	{
+		free_matrice(split_str);
+		return (error);
+	}
+	//printf("pas d'erreur\n");
+	datas->tab = atoi_args(datas, split_str); // fragmente la str et place les int dans un tab d'int
+	if (!datas->tab)
+	{
+		free_matrice(split_str);
+		return (4);
+	}
+	free_matrice(split_str);
+	return (0);
+}
+
+int	case_arg_list(t_datas *datas)
+{
+	int i ;
+	int j;
+
+	datas->nb_elem = datas->argc - 1;
+	j = 0;
+	i = 1;
+	//printf("\ncas ints\n");
+	//check fll int avant tab
+	while (i < (datas->argc))
+	{
+		j = 0;
+		if ((datas->argv[i][j] == '-' || datas->argv[i][j] == '+') && (datas->argv[i][j + 1] >= '1' && datas->argv[i][j + 1] <= '9')) //gerer +?
+			j++;
+		while (datas->argv[i][j])
+		{
+			//printf("digit ? %s\n", &datas->argv[i][j]);
+			//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
+			if (!ft_isdigit(datas->argv[i][j]))
+				return (3);
+			j++;
+		}
+		i++;
+	}
+	j = 0;
+	datas->tab = malloc(sizeof(long long int) * datas->nb_elem);
+	if (!(datas->tab))
+		return (4);
+	while (j < (datas->nb_elem))
+	{
+		datas->tab[j] = ft_atoll(datas->argv[j + 1]);
+		j++;
+	}
+	return (0);
+}
+
+//VIEUX CODE NE PAS LIRE 
 // int	manage_args(int argc, char **argv, t_datas *datas)
 // {
 // 	int i;

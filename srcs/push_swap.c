@@ -6,9 +6,14 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 17:27:14 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 20:01:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+/*
+make && valgrind --leak-check=full --track-origins=yes ./push_swap "5 2 6 9 +66661"
+*/
 
 #include "../includes/push_swap.h"
 
@@ -17,113 +22,83 @@ void	*empty_stack(void)
 	return (NULL);
 }
 
+int push(struct s_elem** head_ref, long long int new_data)
+{
+    /* 1. allocate node */
+    struct s_elem* new_node;
+    new_node = (struct s_elem*)malloc(sizeof(struct s_elem));
+	if(new_node == NULL)
+		return (4);
+ 
+    /* 2. put in the data  */
+    new_node->nb = new_data;
+ 
+    /* 3. Make next of new node as head and previous as NULL
+     */
+    new_node->next = (*head_ref);
+    new_node->prev = NULL;
+ 
+    /* 4. change prev of head node to new node */
+    if ((*head_ref) != NULL)
+        (*head_ref)->prev = new_node;
+ 
+    /* 5. move the head to point to the new node */
+    (*head_ref) = new_node;
+	return (0);
+}
+
+/* Given a reference (pointer to pointer) to the head
+   of a DLL and an int, appends a new node at the end  */
+int append(t_datas *datas, struct s_elem** head_ref, long long int new_data)
+{
+    /* 1. allocate node */
+    struct s_elem* new_node;
+    new_node = (struct s_elem*)malloc(sizeof(struct s_elem));
+	if(new_node == NULL)
+		return (4);
+    datas->a.last = *head_ref; /* used in step 5*/
+ 
+    /* 2. put in the data  */
+    new_node->nb = new_data;
+ 
+    /* 3. This new node is going to be the last node, so
+          make next of it as NULL*/
+    new_node->next = NULL;
+ 
+    /* 4. If the Linked List is empty, then make the new
+          node as head */
+    if (*head_ref == NULL) {
+        new_node->prev = NULL;
+        *head_ref = new_node;
+        return (0);
+    }
+ 
+    /* 5. Else traverse till the last node */
+    while (datas->a.last->next != NULL)
+        datas->a.last = datas->a.last->next;
+ 
+    /* 6. Change the next of last node */
+    datas->a.last->next = new_node;
+ 
+    /* 7. Make last node as previous of new node */
+    new_node->prev = datas->a.last;
+    return (0);
+}
+
 /* 
 	Push all int in the tab in a
 	Given a reference (pointer to pointer) to the head
 	of a DLL and an int, appends a new node at the end  */
-void	init_a(t_datas *datas)
+int	init_a(t_datas *datas)
 {
-	datas->a.head = NULL;
-	/* 1. allocate node */
-	struct s_elem*	new_node;
-	new_node = (struct s_elem*)malloc(sizeof(struct s_elem));
-	if(new_node == NULL)
-		return/**/;
+	int i;
 
-	datas->a.last = datas->a.head; /* used in step 5*/
-
-	/* 2. put in the data  */
-	new_node->nb = datas->tab[0];
-
-	/* 3. This new node is going to be the last node, so make next of it as NULL*/
-	new_node->next = NULL;
-
-	/* 4. If the Linked List is empty, then make the new node as head */
-	if (datas->a.head == NULL)
+	i = datas->nb_elem - 1;
+	append(datas, &datas->a.head, datas->tab[i]);
+	while (i > 0)
 	{
-		new_node->prev = NULL;
-		datas->a.head = new_node;
-		return;
-	}
-
-	/* 5. Else traverse till the last node */
-	while (datas->a.last->next != NULL)
-		datas->a.last = datas->a.last->next;
-
-	/* 6. Change the next of last node */
-	datas->a.last->next = new_node;
-
-	/* 7. Make last node as previous of new node */
-	new_node->prev = datas->a.last;
-	return;
-}
-
-void	push_swap()
-{
-
-}
-
-int	case_arg_str(t_datas *datas)
-{
-	int error;
-	char **split_str;
-
-	//split_str = NULL;
-	split_str = ft_split(datas->argv[1], ' ');
-	if (!split_str)
-		return (4);
-	datas->nb_elem = count_elem(split_str);
-	//printf("\ncas str\n");
-	error = check_str(datas, split_str);
-	if (error > 0) //check si str full chiffres et pas d'espaces en trop (ou gerer les espaces dams count elem)
-	{
-		free_matrice(split_str);
-		return (error);
-	}
-	//printf("pas d'erreur\n");
-	datas->tab = atoi_args(datas, split_str); // fragmente la str et place les int dans un tab d'int
-	if (!datas->tab)
-	{
-		free_matrice(split_str);
-		return (4);
-	}
-	free_matrice(split_str);
-	return (0);
-}
-
-int	case_arg_list(t_datas *datas)
-{
-	int i ;
-	int j;
-
-	datas->nb_elem = datas->argc - 1;
-	j = 0;
-	i = 1;
-	//printf("\ncas ints\n");
-	//check fll int avant tab
-	while (i < (datas->argc))
-	{
-		j = 0;
-		if ((datas->argv[i][j] == '-' || datas->argv[i][j] == '+') && (datas->argv[i][j + 1] >= '1' && datas->argv[i][j + 1] <= '9')) //gerer +?
-			j++;
-		while (datas->argv[i][j])
-		{
-			//printf("digit ? %s\n", &datas->argv[i][j]);
-			//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
-			if (!ft_isdigit(datas->argv[i][j]))
-				return (3);
-			j++;
-		}
-		i++;
-	}
-	j = 0;
-	datas->tab = malloc(sizeof(long long int) * datas->nb_elem);
-	if (!(datas->tab))
-		return (4);
-	while (j < (datas->nb_elem))
-	{
-		datas->tab[j] = ft_atoll(datas->argv[j + 1]);
-		j++;
+		i--;
+		push(&datas->a.head, datas->tab[i]);
 	}
 	return (0);
 }
@@ -135,45 +110,40 @@ int	manage_args(int argc, char **argv, t_datas *datas)
 
 	datas->argc = argc;
 	datas->argv = argv;
+	error = 0;
 	if (argc == 2) //cas str
 	{
 		error = case_arg_str(datas);
-		if (error > 0)
-		{
-			//free_matrice(tab);
+		if (error)
 			return (error);
-		}
 	}
 	else //cas ints ; place tous les arguments dans un tableau d'int
 	{
 		error = case_arg_list(datas);
-		if (error > 0)
-		{
-			//free_matrice(tab);
+		if (error)
 			return (error);
-		}
-		
 	}
 	//printf("last check error\n");
 	error = check_error(datas);
-	if (error > 0) //check si full int et doublons
-	{
-		printf("HELLO\n");
+	if (error) //check si full int et doublons
 		return (error);
-	}
-	free(datas->tab);
 	printf("NO ERROR\n");
 	return (0);
 }
 
 void printstack(t_datas	*datas)
 {
-    printf("\nTraversal in forward direction \n");
+    printf("\nTraversal in forward direction (top to bottom of the list)\n");
     while (datas->a.head != NULL) {
-        printf(" %d ", datas->a.head->nb);
+        printf("%lld ", datas->a.head->nb);
         datas->a.last = datas->a.head;
         datas->a.head = datas->a.head->next;
     }
+	printf("\nTraversal in reverse direction \n");
+    while (datas->a.last != NULL) {
+        printf("%lld ", datas->a.last->nb);
+        datas->a.last = datas->a.last->prev;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -182,18 +152,20 @@ int	main(int argc, char **argv)
 	int error;
 
 	//printf("argc = %d\n", argc);
-
+	datas.a.head = NULL;
+	datas.b.head = NULL;
 	ft_memset(&datas, 0, sizeof(t_datas));
 	if (argc < 2)
 		return (error_case(&datas, 1));
 	error = manage_args(argc, argv, &datas);
 	if (error > 0 && error != 7)
 		return (error_case(&datas, error));
-	//datas.b.head = NULL;
-	//init_a(&datas);
-	//printstack(&datas);
+	init_a(&datas);
+	printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
+	//push_swap(&datas);
 	//free
+	free(datas.tab);
 	return (0);
 }
