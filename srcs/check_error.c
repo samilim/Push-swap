@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/03 23:51:12 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 17:27:20 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ int	error_case(t_datas *datas, unsigned int error_code)
 	if (error_code == 2)
 		write (STDERR_FILENO, "Overflow / Underflow\n", 22);
 	if (error_code == 3)
-		write (STDERR_FILENO, "Non int parameter(s)\n", 22);
+		write (STDERR_FILENO, "Invalid parameter(s)\n", 22);
 	if (error_code == 4)
 		write (STDERR_FILENO, "Allocation error\n", 18);
 	if (error_code == 5)
 		write (STDERR_FILENO, "Found a duplicate\n", 19);
-	free(datas->tab);
+	if (datas->tab)
+		free(datas->tab);
 	return (error_code);
 }
 
@@ -72,14 +73,14 @@ int	check_duplicates(t_datas *datas)
 	i = 0;
 	save = ft_intabdup(datas);
 	if (!save)
-		return (error_case(datas, 4));
+		return (4);
 	while (i < datas->nb_elem)
 	{
 		//printf("check dup : %d\n", datas->tab[i]);
 		if (found_dup(datas, save, datas->tab[i], i) == 1)
 		{
 			free (save);
-			return (error_case(datas, 5));
+			return (5);
 		}
 		i++;
 	}
@@ -97,7 +98,42 @@ int	check_not_integer(t_datas *datas)
 		if (datas->tab[i] >= -2147483648 && datas->tab[i] <= 2147483647)
 			i++;
 		else
-			return (error_case(datas, 2));
+			return (2);
+	}
+	return (0);
+}
+
+int	check_str(t_datas *datas, char **tab)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	//printf("\nargv :\n");
+	//printf("%s\n", datas->argv[0]);
+	//printf("%s\n\n", datas->argv[1]);
+	//printf("check_error : 1\n");
+	while (tab[i])
+	{
+		j = 0;
+		if ((tab[i][j] == '-' || tab[i][j] == '+') && (tab[i][j + 1] >= '1' && tab[i][j + 1] <= '9')) //gerer +?
+			j++;
+		while (tab[i][j])
+		{
+			//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
+			if (!ft_isdigit(tab[i][j]))
+				return (3);
+			j++;
+		}
+		i++;
+	}
+	while (datas->argv[1][i])
+	{
+		//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
+		if (datas->argv[1][i] != ' ' && datas->argv[1][i] != '+' && datas->argv[1][i] != '-' && !ft_isdigit(datas->argv[1][i]))
+			return (3);
+		i++;
 	}
 	return (0);
 }
@@ -109,42 +145,11 @@ int	check_not_integer(t_datas *datas)
 ** the int tab created from the arguments 
 ** contain duplicates or over/underflows.
 */
-int	check_error(t_datas *datas, char **tab, unsigned int type_arg)
+int	check_error(t_datas *datas)
 {
-	int	i;
-	int j;
-
-	i = 0;
-	j = 0;
-	if (type_arg == 1)
-	{
-		//printf("\nargv :\n");
-		//printf("%s\n", datas->argv[0]);
-		//printf("%s\n\n", datas->argv[1]);
-		//printf("check_error : 1\n");
-		while (tab[i])
-		{
-			j = 0;
-			if (tab[i][j] == '-' || tab[i][j] == '+') //gerer +?
-				j++;
-			while (tab[i][j])
-			{
-				//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
-				if (!ft_isdigit(tab[i][j]))
-					return (3);
-				j++;
-			}
-			i++;
-		}
-		while (datas->argv[1][i])
-		{
-			//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
-			if (datas->argv[1][i] != ' ' && datas->argv[1][i] != '+' && datas->argv[1][i] != '-' && !ft_isdigit(datas->argv[1][i]))
-				return (3);
-			i++;
-		}
-	}
-	else if (check_duplicates(datas) > 0 || check_not_integer(datas) > 0)
-		return (7);
+	if (check_duplicates(datas) > 0)
+		return (5);
+	if (check_not_integer(datas) > 0)
+		return (2);
 	return (0);
 }

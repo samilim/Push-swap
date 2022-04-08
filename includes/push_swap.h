@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/03 23:39:10 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 17:06:33 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ typedef struct		s_datas
 	int		nb_elem;
 }					t_datas;
 
-int		check_error(t_datas *datas, char **tab, unsigned int type_arg);
+int		check_error(t_datas *datas);
+int		check_str(t_datas *datas, char **tab);
 int		count_elem(char **nbs);
 int		error_case(t_datas *datas, unsigned int error_code);
 long long int		*atoi_args(t_datas *datas, char **nbs);

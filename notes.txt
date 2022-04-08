@@ -1,8 +1,10 @@
 questions :
+- argument str ou pas ?
 - gerer les espaces en trop ?
 - caracteres speciaux
 - nbs negatifs
 - cas int un seul nb erreur?
+- message erreur adapte autorise ?
 
 etapes :
 --
