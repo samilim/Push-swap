@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 17:27:20 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 17:32:52 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ int	check_not_integer(t_datas *datas)
 	}
 	return (0);
 }
+
+/*
+** Check if the str parameter is contains only digits and chck the spacing
+*/
 
 int	check_str(t_datas *datas, char **tab)
 {
