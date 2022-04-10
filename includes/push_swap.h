@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/10 13:44:22 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/10 20:00:40 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int				count_elem(char **nbs);
 int				error_case(t_datas *datas, unsigned int error_code);
 long long int	*atoi_args(t_datas *datas, char **nbs);
 void			push_swap(t_datas *datas);
-void			ft_pa(t_datas *datas);
-void			ft_pb(t_datas *datas);
+void			delete_node(struct s_elem** head_ref);
+void	clear_list(t_stack *stack);
+int			ft_pa(t_datas *datas);
+int			ft_pb(t_datas *datas);
 int				append(t_datas *datas, struct s_elem **head_ref,
 					struct s_elem **last_ref, long long int new_data);
 int				push(struct s_elem **head_ref, long long int new_data);

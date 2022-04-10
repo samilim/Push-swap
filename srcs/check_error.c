@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 22:31:08 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:27:15 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	error_case(t_datas *datas, unsigned int error_code)
 		write (STDERR_FILENO, "Found a duplicate\n", 19);
 	if (datas->tab)
 		free(datas->tab);
+	clear_list(&datas->a);
+	clear_list(&datas->b);
 	return (error_code);
 }
 
