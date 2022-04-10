@@ -6,13 +6,14 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/10 22:20:13 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/10 22:24:49 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 /*
 make && valgrind --leak-check=full --track-origins=yes ./push_swap "5 2 6 9 +66661"
+gcc -Wall -Wextra -Werror -g3 -fsanitize=address
 */
 
 #include "../includes/push_swap.h"
