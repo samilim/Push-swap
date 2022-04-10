@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 20:32:32 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/10 14:04:31 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	*empty_stack(void)
 	return (NULL);
 }
 
+//push en haut de la stack
 int push(struct s_elem** head_ref, long long int new_data)
 {
     /* 1. allocate node */
@@ -63,7 +64,7 @@ int append(t_datas *datas, struct s_elem** head_ref, struct s_elem** last_ref, l
  
     /* 3. This new node is going to be the last node, so
           make next of it as NULL*/
-    new_node->next = NULL;
+	new_node->next = NULL;
  
     /* 4. If the Linked List is empty, then make the new
           node as head */
@@ -72,7 +73,7 @@ int append(t_datas *datas, struct s_elem** head_ref, struct s_elem** last_ref, l
         *head_ref = new_node;
         return (0);
     }
- 
+
     /* 5. Else traverse till the last node */
     while ((*last_ref)->next != NULL)
         datas->a.last = datas->a.last->next;
@@ -139,18 +140,32 @@ void printstack(t_datas	*datas)
         datas->a.last = datas->a.head;
         datas->a.head = datas->a.head->next;
     }
-	printf("\na in reverse direction \n");
-    while (datas->a.last != NULL) {
-        printf("%lld ", datas->a.last->nb);
-        datas->a.last = datas->a.last->prev;
-	}
+	// printf("\na in reverse direction \n");
+	// while (datas->a.last != NULL) {
+    //     printf("%lld ", datas->a.last->nb);
+    //     datas->a.last = datas->a.last->prev;
+	// }
 	printf("\nb in forward direction (top to bottom of the list)\n");
-    while (datas->b.head != NULL) {
-        printf("%lld ", datas->b.head->nb);
-        datas->b.last = datas->b.head;
-        datas->b.head = datas->b.head->next;
-    }
+    // while (datas->b.head != NULL) {
+    //     printf("%lld ", datas->b.head->nb);
+    //     datas->b.last = datas->b.head;
+    //     datas->b.head = datas->b.head->next;
+    // }
 }
+
+void	clear_list(t_stack *stack)
+{
+	t_elem *tmp;
+	while (stack->head != NULL) {
+		tmp = stack->head->next;
+        free(stack->head);
+        stack->head = tmp;
+    }
+	free(stack->head);
+	stack->head = NULL;
+	printf("FREE STACK\n");
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -159,7 +174,7 @@ int	main(int argc, char **argv)
 
 	//printf("argc = %d\n", argc);
 	datas.a.head = NULL;
-	datas.b.head = NULL;
+	//datas.b.head = NULL;
 	ft_memset(&datas, 0, sizeof(t_datas));
 	if (argc < 2)
 		return (error_case(&datas, 1));
@@ -167,11 +182,13 @@ int	main(int argc, char **argv)
 	if (error > 0 && error != 7)
 		return (error_case(&datas, error));
 	init_a(&datas);
-	push_swap(&datas);
+	//push_swap(&datas);
 	printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
 	//free
+	//lstclear(&datas.a);
+	clear_list(&datas.a);
 	free(datas.tab);
 	return (0);
 }

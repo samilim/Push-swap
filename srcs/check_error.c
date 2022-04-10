@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/08 20:50:40 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/08 22:31:08 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,11 @@ int	error_case(t_datas *datas, unsigned int error_code)
 
 int	found_dup(t_datas *datas, long long int *save, int nb, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (j < datas->nb_elem)
 	{
-		//printf("%d avec nb = %d\n", save[j], nb);
 		if (save[j] == nb && (j != i))
 			return (1);
 		j++;
@@ -47,36 +46,17 @@ int	found_dup(t_datas *datas, long long int *save, int nb, int i)
 	return (0);
 }
 
-long long int	*ft_intabdup(t_datas *datas)
-{
-	long long int	*dest;
-	int		i;
-
-	i = 0;
-	//printf("nb_elem = %d\n", datas->nb_elem);
-	dest = malloc(sizeof(long long int) * datas->nb_elem);
-	if (!dest)
-		return (0);
-	while (i < datas->nb_elem)
-	{
-		dest[i] = datas->tab[i];
-		i++;
-	}
-	return (dest);
-}
-
 int	check_duplicates(t_datas *datas)
 {
 	long long int		*save;
-	int		i;
+	int					i;
 
 	i = 0;
-	save = ft_intabdup(datas);
+	save = ft_llintabdup(datas->tab, datas->nb_elem);
 	if (!save)
 		return (4);
 	while (i < datas->nb_elem)
 	{
-		//printf("check dup : %d\n", datas->tab[i]);
 		if (found_dup(datas, save, datas->tab[i], i) == 1)
 		{
 			free (save);
@@ -90,7 +70,7 @@ int	check_duplicates(t_datas *datas)
 
 int	check_not_integer(t_datas *datas)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < datas->nb_elem)
@@ -104,49 +84,11 @@ int	check_not_integer(t_datas *datas)
 }
 
 /*
-** Check if the str parameter is contains only digits and chck the spacing (?)
-*/
-
-int	check_str(t_datas *datas, char **tab)
-{
-	int	i;
-	int j;
-
-	i = 0;
-	j = 0;
-	//printf("\nargv :\n");
-	//printf("%s\n", datas->argv[0]);
-	//printf("%s\n\n", datas->argv[1]);
-	//printf("check_error : 1\n");
-	while (tab[i])
-	{
-		j = 0;
-		if ((tab[i][j] == '-' || tab[i][j] == '+') && (tab[i][j + 1] >= '1' && tab[i][j + 1] <= '9')) //gerer +?
-			j++;
-		while (tab[i][j])
-		{
-			//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
-			if (!ft_isdigit(tab[i][j]))
-				return (3);
-			j++;
-		}
-		i++;
-	}
-	while (datas->argv[1][i])
-	{
-		//printf("(check if digit) current str[] = '%c'\n", datas->argv[1][i]);
-		if (datas->argv[1][i] != ' ' && datas->argv[1][i] != '+' && datas->argv[1][i] != '-' && !ft_isdigit(datas->argv[1][i]))
-			return (3);
-		i++;
-	}
-	return (0);
-}
-
-/*
 ** Check if 
 ** the int tab created from the arguments 
 ** contain duplicates or over/underflows.
 */
+
 int	check_error(t_datas *datas)
 {
 	if (check_duplicates(datas) > 0)

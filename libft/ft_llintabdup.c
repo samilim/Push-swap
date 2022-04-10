@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting.c                                          :+:      :+:    :+:   */
+/*   ft_llintabdup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/04/10 12:35:42 by salimon          ###   ########.fr       */
+/*   Created: 2022/04/08 22:28:18 by salimon           #+#    #+#             */
+/*   Updated: 2022/04/08 22:29:12 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-/*push b le plus petit nb puis adapter à partir de là
-** grps de 3
-**diviser par deux
-**ecart min et max
-opti en essayant d'utiliser tous les moves*/
+long long int	*ft_llintabdup(long long int *tab, int size)
+{
+	long long int	*dest;
+	int				i;
 
-// void	push_swap(t_datas *datas)
-// {
-//     append(datas, &datas->b.head, &datas->b.last, 3);
-//     //ft_pb(datas);
-//     //ft_pa(datas);
-// }
+	i = 0;
+	dest = malloc(sizeof(long long int) * size);
+	if (!dest)
+		return (0);
+	while (i < size)
+	{
+		dest[i] = tab[i];
+		i++;
+	}
+	return (dest);
+}

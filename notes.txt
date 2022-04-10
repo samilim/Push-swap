@@ -7,9 +7,7 @@ questions :
 - message erreur adapte autorise ?
 
 etapes :
-init stack
---
-operations
+manoeuvres
 --
 algo de tri
 --

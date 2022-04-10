@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:25:14 by salimon           #+#    #+#             */
-/*   Updated: 2022/04/03 23:37:39 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/10 12:22:42 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_node
 }					t_node;
 
 long long int		ft_atoll(const char *nb);
+long long int		*ft_llintabdup(long long int *tab, int size);
 void				*ft_memset(void *mem, int ch, size_t n);
 void				ft_bzero(void *mem, size_t n);
 void				free_matrice(char **tab);
