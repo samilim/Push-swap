@@ -1,8 +1,17 @@
+#ANSI codes used to add colors on my printf / echos
+RED			='\033[0;31m'
+PURPLE		='\033[0;35m'
+YELLOW		='\033[1;33m'
+GREEN		='\033[1;32m'
+NONE		='\033[0m'
+
+# comp
 NAME		= push_swap
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra
 AR 			= ar rcs
 RM			= rm -f
+
 # directories
 INC_PATH	:= includes
 SRCS_PATH	:= srcs
@@ -13,6 +22,8 @@ SRCS 		= srcs/push_swap.c \
 			srcs/parsing.c \
 			srcs/sorting.c \
 			srcs/push.c \
+			srcs/clear.c \
+			srcs/stack_management.c \
 
 SRCS_BONUS				= push_swap_bonus.c \
 						check_error_bonus.c \
@@ -36,6 +47,7 @@ $(LIBFT_LIB):
 
 $(NAME):	$(OBJS)
 			$(CC) $(OBJS) $(LIBFT_LNK) -o $(NAME)
+			@echo -e ${GREEN}You can enter the parameter in two different manners \; one unique str that contain all numbers \"nb1 nb2 nb3\", or directly enter each number as agument, like stated in the new subject.${NONE}
 
 bonus:		$(LIBFT_LIB) $(OBJS_BONUS)
 			$(CC) $(OBJS_BONUS) $(LIBFT_LNK) -o $(NAME)

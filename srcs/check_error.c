@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/10 19:27:15 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/10 23:02:36 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	error_case(t_datas *datas, unsigned int error_code)
 		write (STDERR_FILENO, "Allocation error\n", 18);
 	if (error_code == 5)
 		write (STDERR_FILENO, "Found a duplicate\n", 19);
+	if (error_code == 6)
+		write (STDERR_FILENO, "Invalid operation ; empty stack\n", 33);
 	if (datas->tab)
 		free(datas->tab);
 	clear_list(&datas->a);

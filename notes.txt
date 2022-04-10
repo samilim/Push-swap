@@ -9,14 +9,11 @@ questions :
 etapes :
 manoeuvres
 --
+printf help dans makefile
+--
 algo de tri
 --
-free / leaks
---
 bonus
-
-mallocs :
-datas->tab
 
 radix sort
 ruby -e "puts (1..100).to_a.shuffle"
