@@ -5,6 +5,7 @@ questions :
 - nbs negatifs
 - cas int un seul nb erreur?
 - message erreur adapte autorise ?
+- si ss, sencée executer sa quand sb impossible ?
 
 etapes :
 manoeuvres

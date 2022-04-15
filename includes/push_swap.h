@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/10 23:25:15 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/15 02:16:20 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,16 @@ void			delete_node(struct s_elem **head_re);
 void			clear_list(t_stack *stack);
 int				ft_pa(t_datas *datas);
 int				ft_pb(t_datas *datas);
-int				append(t_datas *datas, struct s_elem **head_ref,
+int				ft_sa(t_datas *datas, int ss);
+int				ft_sb(t_datas *datas, int ss);
+int				ft_ss(t_datas *datas);
+int				ft_ra(t_datas *datas, int rr);
+int				ft_rb(t_datas *datas, int rr);
+int				ft_rr(t_datas *datas);
+int				ft_rra(t_datas *datas, int rrr);
+int    			ft_rrb(t_datas *datas, int rrr);
+int				ft_rrr(t_datas *datas);
+int				append(/*t_datas *datas, */struct s_elem **head_ref,
 					struct s_elem **last_ref, long long int new_data);
 int				push(struct s_elem **head_ref, long long int new_data);
 

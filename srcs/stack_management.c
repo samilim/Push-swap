@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 23:15:31 by salimon           #+#    #+#             */
-/*   Updated: 2022/04/10 23:26:54 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/15 01:49:32 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int push(struct s_elem** head_ref, long long int new_data)
 }
 
 /* Appends a new node at the end  */
-int append(t_datas *datas, struct s_elem** head_ref, struct s_elem** last_ref, long long int new_data)
+int append(/*t_datas *datas, */struct s_elem** head_ref, struct s_elem** last_ref, long long int new_data)
 {
     struct s_elem* new_node;
 
@@ -58,7 +58,7 @@ int append(t_datas *datas, struct s_elem** head_ref, struct s_elem** last_ref, l
 
     /* Else traverse till the last node */
     while ((*last_ref)->next != NULL)
-        datas->a.last = datas->a.last->next;
+        (*last_ref) = (*last_ref)->next;
  
     /* Change the next of last node */
     (*last_ref)->next = new_node;

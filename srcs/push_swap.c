@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/10 23:28:44 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/15 02:16:42 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_a(t_datas *datas)
 	int i;
 
 	i = datas->nb_elem - 1;
-	append(datas, &datas->a.head, &datas->a.last, datas->tab[i]);
+	append(/*datas, */&datas->a.head, &datas->a.last, datas->tab[i]);
 	while (i > 0)
 	{
 		i--;
@@ -70,7 +70,7 @@ void printstack(t_datas	*datas)
     printf("\na in forward direction (top to bottom of the list)\n");
     while (tmp != NULL) {
         printf("%lld ", tmp->nb);
-        datas->a.last = tmp;
+        //datas->a.last = tmp;
         tmp = tmp->next;
     }
 	// printf("\na in reverse direction \n");
@@ -82,7 +82,7 @@ void printstack(t_datas	*datas)
 	printf("\nb in forward direction (top to bottom of the list)\n");
     while (tmp != NULL) {
         printf("%lld ", tmp->nb);
-        datas->b.last = tmp;
+        //datas->b.last = tmp;
         tmp = tmp->next;
     }
 	printf("\n\n\n");
@@ -117,7 +117,24 @@ int	main(int argc, char **argv)
 	printstack(&datas);
 	ft_pa(&datas);
 	printstack(&datas);
-	//ft_sa(&datas);
+	ft_sa(&datas, 0);
+	printstack(&datas);
+	ft_sa(&datas, 0);
+	printstack(&datas);
+	ft_sb(&datas, 0);
+	printstack(&datas);
+	ft_ss(&datas);
+	printstack(&datas);
+	ft_ra(&datas, 0);
+	printstack(&datas);
+	ft_ra(&datas, 0);
+	printstack(&datas);
+	ft_rb(&datas, 0);
+	printstack(&datas);
+	ft_rr(&datas);
+	printstack(&datas);
+	ft_rra(&datas, 0);
+	printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
 	clear_list(&datas.a);

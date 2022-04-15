@@ -22,6 +22,9 @@ SRCS 		= srcs/push_swap.c \
 			srcs/parsing.c \
 			srcs/sorting.c \
 			srcs/push.c \
+			srcs/swap.c \
+			srcs/rotate.c \
+			srcs/reverse.c \
 			srcs/clear.c \
 			srcs/stack_management.c \
 
