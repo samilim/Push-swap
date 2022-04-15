@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/15 02:16:42 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/15 23:21:19 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,12 @@ int	main(int argc, char **argv)
 	ft_rr(&datas);
 	printstack(&datas);
 	ft_rra(&datas, 0);
+	printstack(&datas);
+	ft_rra(&datas, 0);
+	printstack(&datas);
+	ft_rrb(&datas, 0);
+	printstack(&datas);
+	ft_rrr(&datas);
 	printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)

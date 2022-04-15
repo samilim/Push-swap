@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 23:15:31 by salimon           #+#    #+#             */
-/*   Updated: 2022/04/15 01:49:32 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/15 23:02:56 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ int append(/*t_datas *datas, */struct s_elem** head_ref, struct s_elem** last_re
  
     /* Make last node as previous of new node */
     new_node->prev = *last_ref;
+    new_node->next = NULL;//
+    (*last_ref) = new_node;
     return (1);
 }

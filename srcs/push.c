@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 17:57:16 by salimon           #+#    #+#             */
-/*   Updated: 2022/04/15 01:50:47 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/15 23:27:19 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_pa(t_datas *datas)
 		return (0);
 	if (datas->a.head == NULL)
 	{
-		if (!append(/*datas, */&datas->a.head, &datas->a.last, datas->b.head->nb))
+		if (!append(&datas->a.head, &datas->a.last, datas->b.head->nb))
 			return (4);
 	}
 	else
@@ -42,7 +42,7 @@ int	ft_pb(t_datas *datas)
 		return (0);
 	if (datas->b.head == NULL)
 	{
-		if (!append(/*datas, */&datas->b.head, &datas->b.last, datas->a.head->nb))
+		if (!append(&datas->b.head, &datas->b.last, datas->a.head->nb))
 			return (4);
 	}
 	else
