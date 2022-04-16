@@ -1,21 +1,15 @@
 questions :
 - argument str ou pas ?
 - gerer les espaces en trop ?
-- caracteres speciaux
-- nbs negatifs
 - cas int un seul nb erreur?
 - message erreur adapte autorise ?
 - si ss, sencée executer sa quand sb impossible ?
 
 etapes :
-manoeuvres
---
-printf help dans makefile
---
 algo de tri
 --
 bonus
 
-radix sort
+radix sort ; attention aux negatifs lors de la lecture binaire
 ruby -e "puts (1..100).to_a.shuffle"
 ARG="1 2 3" | ./push_swap $=ARG   (ajouter = pour eviter conflits sous zsh)

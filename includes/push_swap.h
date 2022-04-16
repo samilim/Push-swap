@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/15 02:16:20 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/16 05:31:53 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef struct s_elem
 {
 	long long int	nb;
+	int				index;
 	struct s_elem	*prev;
 	struct s_elem	*next;
 }					t_elem;
@@ -38,7 +39,7 @@ typedef struct s_stack
 	struct s_elem	*head;
 	struct s_elem	*last;
 	int				size;
-	int				mediane;
+	long long int	mediane;
 }				t_stack;
 
 /*
@@ -55,15 +56,19 @@ typedef struct s_datas
 	int				nb_elem;
 }				t_datas;
 
+/* parsing */
 int				check_error(t_datas *datas);
 int				case_arg_str(t_datas *datas);
 int				case_arg_list(t_datas *datas);
 int				count_elem(char **nbs);
 int				error_case(t_datas *datas, unsigned int error_code);
 long long int	*atoi_args(t_datas *datas, char **nbs);
-void			push_swap(t_datas *datas);
+/* sorting */
+int				push_swap(t_datas *datas);
+/* utils */
 void			delete_node(struct s_elem **head_re);
 void			clear_list(t_stack *stack);
+/* operations */
 int				ft_pa(t_datas *datas);
 int				ft_pb(t_datas *datas);
 int				ft_sa(t_datas *datas, int ss);
@@ -75,7 +80,7 @@ int				ft_rr(t_datas *datas);
 int				ft_rra(t_datas *datas, int rrr);
 int    			ft_rrb(t_datas *datas, int rrr);
 int				ft_rrr(t_datas *datas);
-int				append(/*t_datas *datas, */struct s_elem **head_ref,
+int				append(struct s_elem **head_ref,
 					struct s_elem **last_ref, long long int new_data);
 int				push(struct s_elem **head_ref, long long int new_data);
 

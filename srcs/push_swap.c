@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/15 23:21:19 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/16 08:49:35 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_a(t_datas *datas)
 	int i;
 
 	i = datas->nb_elem - 1;
-	append(/*datas, */&datas->a.head, &datas->a.last, datas->tab[i]);
+	append(&datas->a.head, &datas->a.last, datas->tab[i]);
 	while (i > 0)
 	{
 		i--;
@@ -88,6 +88,48 @@ void printstack(t_datas	*datas)
 	printf("\n\n\n");
 }
 
+int	test_operations(t_datas *datas)
+{
+	if (ft_pb(datas))
+		return(error_case(datas, 4));
+	ft_pb(datas);
+	ft_pb(datas);
+	if (ft_pb(datas))
+		return(error_case(datas, 4));
+	if (ft_pb(datas))
+		return(error_case(datas, 4));
+	if (ft_pb(datas))
+		return(error_case(datas, 4));
+	printstack(datas);
+	ft_pa(datas);
+	printstack(datas);
+	ft_sa(datas, 0);
+	printstack(datas);
+	ft_sa(datas, 0);
+	printstack(datas);
+	ft_sb(datas, 0);
+	printstack(datas);
+	ft_ss(datas);
+	printstack(datas);
+	ft_ra(datas, 0);
+	printstack(datas);
+	ft_ra(datas, 0);
+	printstack(datas);
+	ft_rb(datas, 0);
+	printstack(datas);
+	ft_rr(datas);
+	printstack(datas);
+	ft_rra(datas, 0);
+	printstack(datas);
+	ft_rra(datas, 0);
+	printstack(datas);
+	ft_rrb(datas, 0);
+	printstack(datas);
+	ft_rrr(datas);
+	printstack(datas);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_datas datas;
@@ -95,6 +137,8 @@ int	main(int argc, char **argv)
 
 	datas.a.head = NULL;
 	datas.b.head = NULL;
+	//datas.a.last = NULL;
+	//datas.b.last = NULL;
 	ft_memset(&datas, 0, sizeof(t_datas));
 	if (argc < 2)
 		return (error_case(&datas, 1));
@@ -102,45 +146,10 @@ int	main(int argc, char **argv)
 	if (error > 0 && error != 7)
 		return (error_case(&datas, error));
 	init_a(&datas);
-	//push_swap(&datas);
 	printstack(&datas);
-	if (ft_pb(&datas))
-		return(error_case(&datas, 4));
-	ft_pb(&datas);
-	ft_pb(&datas);
-	if (ft_pb(&datas))
-		return(error_case(&datas, 4));
-	if (ft_pb(&datas))
-		return(error_case(&datas, 4));
-	if (ft_pb(&datas))
-		return(error_case(&datas, 4));
+	push_swap(&datas);
 	printstack(&datas);
-	ft_pa(&datas);
-	printstack(&datas);
-	ft_sa(&datas, 0);
-	printstack(&datas);
-	ft_sa(&datas, 0);
-	printstack(&datas);
-	ft_sb(&datas, 0);
-	printstack(&datas);
-	ft_ss(&datas);
-	printstack(&datas);
-	ft_ra(&datas, 0);
-	printstack(&datas);
-	ft_ra(&datas, 0);
-	printstack(&datas);
-	ft_rb(&datas, 0);
-	printstack(&datas);
-	ft_rr(&datas);
-	printstack(&datas);
-	ft_rra(&datas, 0);
-	printstack(&datas);
-	ft_rra(&datas, 0);
-	printstack(&datas);
-	ft_rrb(&datas, 0);
-	printstack(&datas);
-	ft_rrr(&datas);
-	printstack(&datas);
+	//test_operations(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
 	clear_list(&datas.a);
