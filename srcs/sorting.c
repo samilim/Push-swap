@@ -6,19 +6,14 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/04/16 08:51:42 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/17 17:48:39 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-/*push b le plus petit nb puis adapter à partir de là
-** grps de 3
-**diviser par deux
-**ecart min et max
-opti en essayant d'utiliser tous les moves*/
-
-int     check_sort(/*t_datas *datas, */t_stack *stack)
+/* Check if the stac is sorted */
+int     check_sort(t_stack *stack)
 {
     t_elem *tmp;
     //int i;
@@ -31,9 +26,13 @@ int     check_sort(/*t_datas *datas, */t_stack *stack)
             return (0);
         tmp = tmp->next;
     }
+    printf("good\n");
     return (1);
 }
 
+/*
+    Push all nb < to the median in the stack b
+*/
 int    push_up_to_b(t_datas *datas)
 {
     int i = 0;
@@ -46,17 +45,22 @@ int    push_up_to_b(t_datas *datas)
         }
         else
         {
-            if (datas->b.head != NULL)
+            if (datas->b.head != NULL && datas->b.head->next != NULL)
             {
                 if (datas->b.head->nb < datas->b.last->nb)
                     ft_rr(datas);
             }
-            ft_ra(datas, 1);
+            ft_ra(datas, 0);
         }
     }
+    // printf("head a : %lld\n", datas->a.head->nb);
+    // printf("last a : %lld\n", datas->a.last->nb);
+    // printf("head b : %lld\n", datas->b.head->nb);
+    // printf("last b : %lld\n", datas->b.last->nb);
     return (0);
 }
 
+/* Obtain tab of the sorted arguments */
 void    sort_tab(t_datas *datas, t_stack *stack)
 {
     int i;
@@ -77,25 +81,44 @@ void    sort_tab(t_datas *datas, t_stack *stack)
         i++;
     }
     i = 0;
-    printf("arg sort : ");
+    //printf("arg sort : ");
     while (i < datas->nb_elem)
     {
-        printf("%lld ", datas->tab[i]);
+        //printf("%lld ", datas->tab[i]);
         i++;
     }
-    printf("\n");
+    //printf("\n");
 }
 
 int	push_swap(t_datas *datas)
 {
-    printf("nb arg = %d\n", datas->nb_elem);
+    //int i = 0;
+    //int j = 0;
+    //printf("nb arg = %d\n", datas->nb_elem);
     sort_tab(datas, &datas->a);
-    printf("mediane de a = %lld\n", datas->a.mediane);
+    //printf("mediane de a = %lld\n", datas->a.mediane);
     push_up_to_b(datas);
-    // while (!check_sort(datas, &datas->a))
+    // while (i < datas->nb_elem)
     // {
-
+    //     while(j < datas->nb_elem)
+    //     {
+    //         if (datas->b.head == NULL || (datas->a.head->nb > datas->b.head->nb))
+    //         {
+    //             ft_pb(datas);
+    //             j++;
+    //         }
+    //         if (datas->b.head->nb < datas->b.last->nb)
+    //         {
+    //             if (datas->a.head->nb > datas->a.last->nb)
+    //                 ft_rrr(datas);
+    //             else
+    //                 ft_rrb(datas, 0);
+    //         }
+    //         else
+    //             ft_ra(datas, 0);
+    //     }
+    //     ft_pa(datas);
+    //     i++;
     // }
-    //get_index();
     return (0);
 }

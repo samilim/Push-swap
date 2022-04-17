@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 23:15:31 by salimon           #+#    #+#             */
-/*   Updated: 2022/04/15 23:02:56 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/17 16:05:15 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ int append(/*t_datas *datas, */struct s_elem** head_ref, struct s_elem** last_re
  
     /* If the Linked List is empty, then make the new
           node as head */
-    if (*head_ref == NULL) {
+    if (*head_ref == NULL)
+    {
         new_node->prev = NULL;
         *head_ref = new_node;
+        (*last_ref) = new_node;
         return (1);
     }
 

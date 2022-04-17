@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/16 08:49:35 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/17 19:50:36 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,12 @@ int	main(int argc, char **argv)
 		return (error_case(&datas, error));
 	init_a(&datas);
 	printstack(&datas);
+
 	push_swap(&datas);
 	printstack(&datas);
-	//test_operations(&datas);
+	
+	test_operations(&datas);
+	printstack(&datas);
 	//ANALYSER A (voir quelle strat adopter)
 	//TRIER (appliquer la strat)
 	clear_list(&datas.a);

@@ -13,3 +13,9 @@ bonus
 radix sort ; attention aux negatifs lors de la lecture binaire
 ruby -e "puts (1..100).to_a.shuffle"
 ARG="1 2 3" | ./push_swap $=ARG   (ajouter = pour eviter conflits sous zsh)
+
+push b le plus petit nb puis adapter à partir de là
+ grps de 3
+diviser par deux
+ecart min et max
+opti en essayant d'utiliser tous les moves
