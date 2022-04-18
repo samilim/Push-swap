@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/04/17 17:48:39 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/18 01:58:23 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,63 @@ int     check_sort(t_stack *stack)
             return (0);
         tmp = tmp->next;
     }
-    printf("good\n");
     return (1);
+}
+
+
+void    get_median(t_stack *stack)
+{
+    t_stack *tmp;
+    long long int swp;
+
+    tmp = stack;
+    // while (tmp.next != NULL)
+    // {
+    //     if (tmp.next != NULL && tmp.nb > tmp.next->nb)
+    //     {
+    //         swp = tmp.nb;
+    //         tmp.nb = tmp.next->nb;
+    //         tmp.next->nb = swp;
+    //         while (tmp.prev != NULL)
+    //             tmp = *tmp.prev;
+    //     }
+    //     tmp = *tmp.next;
+    // }
+    while (tmp->head->next != NULL)
+    {
+        if (tmp->head->next != NULL && tmp->head->nb > tmp->head->next->nb)
+        {
+            swp = tmp->head->nb;
+            tmp->head->nb = tmp->head->next->nb;
+            tmp->head->next->nb = swp;
+            while (tmp->head->prev != NULL)
+                tmp->head = tmp->head->prev;
+        }
+        tmp->head = tmp->head->next;
+    }
+    // while (tmp.next != NULL)
+    // {
+    //     if (tmp.next != NULL && tmp.nb > tmp.next->nb)
+    //     {
+    //         swp = tmp.nb;
+    //         tmp.nb = tmp.next->nb;
+    //         tmp.next->nb = swp;
+    //         while (tmp.prev != NULL)
+    //             tmp = tmp.prev;
+    //     }
+    //     tmp = tmp.next;
+    // }
+    // while (tmp->head->prev != NULL)
+    //             tmp->head = tmp->head->prev;
+    // t_elem *tmp2;
+
+	// tmp2 = tmp->head;
+    // printf("\na in forward direction (top to bottom of the list)\n");
+    // while (tmp2 != NULL) {
+    //     printf("%lld ", tmp2->nb);
+    //     //datas->a.last = tmp;
+    //     tmp2 = tmp2->next;
+    // }
 }
 
 /*
@@ -36,21 +91,22 @@ int     check_sort(t_stack *stack)
 int    push_up_to_b(t_datas *datas)
 {
     int i = 0;
-    while (i < datas->nb_elem / 2 && (datas->a.head != NULL && datas->a.head->next != NULL))
+    while (i < (datas->nb_elem / 2 - 3) && (datas->a.head != NULL && datas->a.head->next != NULL))
     {
-        if (datas->a.head->nb < datas->a.mediane)
+        //get_median(&datas->a);
+        if (datas->a.head->nb < datas->a.mediane) //recalculer la mediane a chaque cycle?
         {
             ft_pb(datas);
             i++;
         }
         else
         {
-            if (datas->b.head != NULL && datas->b.head->next != NULL)
+            if (datas->b.head != NULL && datas->b.head->next != NULL && datas->b.head->nb < datas->b.last->nb)
             {
-                if (datas->b.head->nb < datas->b.last->nb)
                     ft_rr(datas);
             }
-            ft_ra(datas, 0);
+            else
+                ft_ra(datas, 0);
         }
     }
     // printf("head a : %lld\n", datas->a.head->nb);
@@ -59,6 +115,7 @@ int    push_up_to_b(t_datas *datas)
     // printf("last b : %lld\n", datas->b.last->nb);
     return (0);
 }
+
 
 /* Obtain tab of the sorted arguments */
 void    sort_tab(t_datas *datas, t_stack *stack)

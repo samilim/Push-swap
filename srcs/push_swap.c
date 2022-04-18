@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/17 19:50:36 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/17 23:52:26 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	init_a(t_datas *datas)
 		i--;
 		push(&datas->a.head, datas->tab[i]);
 	}
+	datas->a.size = datas->nb_elem;
 	return (0);
 }
 
@@ -137,8 +138,7 @@ int	main(int argc, char **argv)
 
 	datas.a.head = NULL;
 	datas.b.head = NULL;
-	//datas.a.last = NULL;
-	//datas.b.last = NULL;
+	datas.b.size = 0;
 	ft_memset(&datas, 0, sizeof(t_datas));
 	if (argc < 2)
 		return (error_case(&datas, 1));
@@ -151,10 +151,9 @@ int	main(int argc, char **argv)
 	push_swap(&datas);
 	printstack(&datas);
 	
-	test_operations(&datas);
-	printstack(&datas);
-	//ANALYSER A (voir quelle strat adopter)
-	//TRIER (appliquer la strat)
+	//test_operations(&datas);
+	//printstack(&datas);
+	
 	clear_list(&datas.a);
 	clear_list(&datas.b);
 	free(datas.tab);

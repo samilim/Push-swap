@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 17:57:16 by salimon           #+#    #+#             */
-/*   Updated: 2022/04/17 15:59:52 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/17 23:34:33 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_pa(t_datas *datas)
 		if (!push(&datas->a.head, datas->b.head->nb))
 			return (4);
 	}
+	datas->a.size += 1;
+	datas->b.size -= 1;
 	delete_node(&datas->b.head);
 	write(1, "pa\n", 4);
 	return (0);
@@ -52,6 +54,8 @@ int	ft_pb(t_datas *datas)
 		if (!push(&datas->b.head, datas->a.head->nb))
 			return (4);
 	}
+	datas->a.size -= 1;
+	datas->b.size += 1;
 	//printf("head b : %lld\n", datas->b.head->nb);
     //printf("last b : %lld\n", datas->b.last->nb);
 	delete_node(&datas->a.head);
