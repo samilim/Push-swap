@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/17 23:52:26 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/23 23:44:33 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 make && valgrind --leak-check=full --track-origins=yes ./push_swap "5 2 6 9 +66661"
 gcc -Wall -Wextra -Werror -g3 -fsanitize=address
 make && valgrind --leak-check=full --track-origins=yes ./push_swap 5 2 6 +94564 55 -9 -3 12 -2 0
+make && valgrind --leak-check=full --track-origins=yes ./push_swap 5 2 6 +94564 55 -9 -3 12 -2 13 16 59 75 96 100 41 36 22 11 66 -78
 */
 
 #include "../includes/push_swap.h"

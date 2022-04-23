@@ -19,3 +19,23 @@ push b le plus petit nb puis adapter à partir de là
 diviser par deux
 ecart min et max
 opti en essayant d'utiliser tous les moves
+
+
+quand push sur b rb si > median
+
+50         9 7coup
+100        48 4 
+1           
+            69 5
+
+ra rb 
+rra rrb
+ra rrb
+rra rb
+
+
+push tout dans b sauf min max et median
+ensuite stocker nb de coup optimal pour trier head de binaire
+comparer nb de coup du nb a trier dans les *nb de coup* prochain next de b
+pusha l'opti et trier a en optimisant le nb de coup : 8 ra et 6 rb == 6rr et 2ra 
+recommencer

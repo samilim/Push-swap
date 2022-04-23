@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/17 23:45:10 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/23 23:48:14 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_stack
 	struct s_elem	*head;
 	struct s_elem	*last;
 	int				size;
-	long long int	mediane;
 }				t_stack;
 
 /*
@@ -54,6 +53,10 @@ typedef struct s_datas
 	int				argc;
 	char			**argv;
 	int				nb_elem;
+	long long int	min;
+	long long int	max;
+	long long int	median;
+	int				move_count;
 }				t_datas;
 
 /* parsing */
