@@ -6,19 +6,19 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/04/23 23:40:22 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 05:14:12 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /* Check if the stac is sorted */
-int     check_sort(t_stack *stack)
+int     check_sort(t_stack stack)
 {
     t_elem *tmp;
     //int i;
 
-    tmp = stack->head;
+    tmp = stack.head;
     //i = 0;
     while (tmp->next != NULL)
     {
@@ -26,6 +26,7 @@ int     check_sort(t_stack *stack)
             return (0);
         tmp = tmp->next;
     }
+    printf("a is sorted\n");
     return (1);
 }
 
@@ -148,12 +149,14 @@ int    push_to_b(t_datas *datas)
 }
 
 /* Obtain tab of the sorted arguments */
-void    sort_tab(t_datas *datas)
+int    sort_tab(t_datas *datas)
 {
     int i;
+    int sorted;
     long long int swp;
 
     i = 1;
+    sorted = 0;
     while(i < datas->nb_elem)
     {
         if (datas->tab[i] < datas->tab[i - 1])
@@ -161,6 +164,7 @@ void    sort_tab(t_datas *datas)
             swp = datas->tab[i];
             datas->tab[i] = datas->tab[i - 1];
             datas->tab[i - 1] = swp;
+            sorted = 1;
             if (i == datas->nb_elem / 2)
                 datas->median = datas->tab[i];
             i = 0;
@@ -170,43 +174,116 @@ void    sort_tab(t_datas *datas)
     datas->min = datas->tab[0];
     datas->max = datas->tab[datas->nb_elem - 1];
     i = 0;
-    printf("arg sort : ");
-    while (i < datas->nb_elem)
+    // printf("arg sort : ");
+    // while (i < datas->nb_elem)
+    // {
+    //     printf("%lld ", datas->tab[i]);
+    //     i++;
+    // }
+    // printf("\n");
+    return (sorted);
+}
+
+int sort_three(t_datas *datas)
+{
+    while (!(datas->a.head->nb < datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb))
     {
-        printf("%lld ", datas->tab[i]);
-        i++;
+        if (datas->a.head->nb > datas->a.last->nb && datas->a.last->nb < datas->a.head->next->nb && datas->a.head->nb < datas->a.head->next->nb)
+        {
+            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
+            {
+                if (ft_rrr(datas) != 0)
+                    return (4);
+            }
+            else
+            {
+                if (ft_rra(datas, 0) != 0)
+                    return (4);
+            }
+        }
+        else if (datas->a.head->nb > datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb && datas->a.head->nb > datas->a.last->nb)
+        {
+            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
+            {
+                if (ft_rr(datas) != 0)
+                    return (4);
+            }
+            else
+            {
+                if (ft_ra(datas, 0) != 0)
+                    return (4);
+            }
+        }
+        else
+        {
+            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
+                ft_ss(datas);
+            else
+                ft_sa(datas, 0);
+        }
     }
-    printf("\n");
+    return (0);
 }
 
 int	push_swap(t_datas *datas)
 {
+    //int i;
+
+    //i = 0;
     //printf("nb arg = %d\n", datas->nb_elem);
+
+
     sort_tab(datas/*, &datas->a*/);
-    printf("mediane = %lld\n", datas->median);
-    printf("MIN : %lld\n", datas->min);
-    printf("MAX : %lld\n", datas->max);
+
+
+    // printf("mediane = %lld\n", datas->median);
+    // printf("MIN : %lld\n", datas->min);
+    // printf("MAX : %lld\n\n", datas->max);
     //push_up_to_median(datas);
-    push_to_b(datas);
-
-    // if (datas->nb_elem == 3)
-    // {
-    //     if (datas->a.head->nb > datas->a.last->nb)
-    //     {
-    //         if(datas->a.head->nb > datas->a.head->next->nb)
-    //         {
-
-    //         }
-    //         else
-                
-    //     }
-    // }
-
-    // if (datas->nb_elem == 5)
-    // {
-    //     /**/
-    // }
-
-
+    // printf("head = %lld\n", datas->a.head->nb);
+    // printf("next = %lld\n", datas->a.head->next->nb);
+    // printf("last = %lld\n", datas->a.last->nb);
+    if (datas->nb_elem == 3)
+    {
+        if (sort_three(datas) != 0)
+            return (4);
+    }
+    if (datas->nb_elem == 5 && !check_sort(datas->a)/*sort_tab(datas)*/) /* 3 4 5 1 2 */
+    {
+        int pb = 0;
+        //printstack(datas);
+        while (pb < 2)
+        {
+            if (datas->a.last->nb == datas->min || datas->a.last->nb == datas->tab[1])
+            {
+                if (ft_rra(datas, 0) != 0)
+                {
+                    printf("TEST\n");
+                    return (4);
+                }
+                if (ft_pb(datas) != 0)
+                    return (4);
+                pb++;
+            }
+            else if (datas->a.head->nb == datas->min || datas->a.head->nb == datas->tab[1])
+            {
+                if (ft_pb(datas) != 0)
+                    return (4);
+                pb++;
+            }
+            else
+            {
+                if (ft_ra(datas, 0) != 0)
+                    return (4);
+            }
+        }
+        sort_three(datas);
+        ft_pa(datas);
+        ft_pa(datas);
+        if (datas->a.head->nb > datas->a.head->next->nb)
+            ft_sa(datas, 0);
+    }
+    // else
+    //     push_to_b(datas);
     return (0);
 }

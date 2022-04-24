@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/16 02:55:20 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 05:11:30 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	error_case(t_datas *datas, unsigned int error_code)
 		free(datas->tab);
 	clear_list(&datas->a);
 	clear_list(&datas->b);
-	return (error_code);
+	//return (error_code);
+	exit(EXIT_FAILURE);
 }
 
 int	found_dup(t_datas *datas, long long int *save, int nb, int i)

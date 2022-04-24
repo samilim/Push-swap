@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/23 23:48:14 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 04:56:08 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ int				ft_rrr(t_datas *datas);
 int				append(struct s_elem **head_ref,
 					struct s_elem **last_ref, long long int new_data);
 int				push(struct s_elem **head_ref, long long int new_data);
+
+void printstack(t_datas	*datas);
 
 #endif

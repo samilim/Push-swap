@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/23 23:44:33 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 04:38:40 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ int	init_a(t_datas *datas)
 	int i;
 
 	i = datas->nb_elem - 1;
-	append(&datas->a.head, &datas->a.last, datas->tab[i]);
+	if (!append(&datas->a.head, &datas->a.last, datas->tab[i]))
+		return (4);
 	while (i > 0)
 	{
 		i--;
-		push(&datas->a.head, datas->tab[i]);
+		if (!push(&datas->a.head, datas->tab[i]))
+			return (4);
 	}
 	datas->a.size = datas->nb_elem;
 	return (0);
@@ -80,13 +82,13 @@ void printstack(t_datas	*datas)
     //     printf("%lld ", datas->a.last->nb);
     //     datas->a.last = datas->a.last->prev;
 	// }
-	tmp = datas->b.head;
-	printf("\nb in forward direction (top to bottom of the list)\n");
-    while (tmp != NULL) {
-        printf("%lld ", tmp->nb);
-        //datas->b.last = tmp;
-        tmp = tmp->next;
-    }
+	// tmp = datas->b.head;
+	// printf("\nb in forward direction (top to bottom of the list)\n");
+    // while (tmp != NULL) {
+    //     printf("%lld ", tmp->nb);
+    //     //datas->b.last = tmp;
+    //     tmp = tmp->next;
+    // }
 	printf("\n\n\n");
 }
 
@@ -146,10 +148,14 @@ int	main(int argc, char **argv)
 	error = manage_args(argc, argv, &datas);
 	if (error > 0 && error != 7)
 		return (error_case(&datas, error));
-	init_a(&datas);
+	error = init_a(&datas);
+	if (error > 0)
+		return (error_case(&datas, error));
 	printstack(&datas);
 
-	push_swap(&datas);
+	error = push_swap(&datas);
+	if (error > 0)
+		return (error_case(&datas, error));
 	printstack(&datas);
 	
 	//test_operations(&datas);
