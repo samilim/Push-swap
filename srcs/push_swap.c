@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 04:38:40 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 06:04:02 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,47 +23,38 @@ make && valgrind --leak-check=full --track-origins=yes ./push_swap 5 2 6 +94564 
 /* Push all int in the tab in a
 Given a reference (pointer to pointer) to the head
 of a DLL and an int, appends a new node at the end  */
-int	init_a(t_datas *datas)
+void	init_a(t_datas *datas)
 {
 	int i;
 
 	i = datas->nb_elem - 1;
 	if (!append(&datas->a.head, &datas->a.last, datas->tab[i]))
-		return (4);
+		error_case(datas, 4);
 	while (i > 0)
 	{
 		i--;
 		if (!push(&datas->a.head, datas->tab[i]))
-			return (4);
+			error_case(datas, 4);
 	}
 	datas->a.size = datas->nb_elem;
-	return (0);
 }
 
-int	manage_args(int argc, char **argv, t_datas *datas)
+void	manage_args(int argc, char **argv, t_datas *datas)
 {
-	int error;
-
 	datas->argc = argc;
 	datas->argv = argv;
-	error = 0;
-	if (argc == 2) //cas str
-	{
-		error = case_arg_str(datas);
-		if (error)
-			return (error);
-	}
+	if (argc == 2) //cas str 
+		case_arg_str(datas);
 	else //cas ints ; place tous les arguments dans un tableau d'int
-	{
-		error = case_arg_list(datas);
-		if (error)
-			return (error);
-	}
-	error = check_error(datas);
-	if (error)
-		return (error);
+		case_arg_list(datas);
+	/*
+	** Check if 
+	** the int tab created from the arguments 
+	** contain duplicates or over/underflows.
+	*/
+	check_duplicates(datas);
+	check_not_integer(datas);
 	printf("NO ERROR\n");
-	return (0);
 }
 
 void printstack(t_datas	*datas)
@@ -71,10 +62,9 @@ void printstack(t_datas	*datas)
 	t_elem *tmp;
 
 	tmp = datas->a.head;
-    printf("\na in forward direction (top to bottom of the list)\n");
+    printf("\na actually :\n");
     while (tmp != NULL) {
         printf("%lld ", tmp->nb);
-        //datas->a.last = tmp;
         tmp = tmp->next;
     }
 	// printf("\na in reverse direction \n");
@@ -94,16 +84,12 @@ void printstack(t_datas	*datas)
 
 int	test_operations(t_datas *datas)
 {
-	if (ft_pb(datas))
-		return(error_case(datas, 4));
 	ft_pb(datas);
 	ft_pb(datas);
-	if (ft_pb(datas))
-		return(error_case(datas, 4));
-	if (ft_pb(datas))
-		return(error_case(datas, 4));
-	if (ft_pb(datas))
-		return(error_case(datas, 4));
+	ft_pb(datas);
+	ft_pb(datas);
+	ft_pb(datas);
+	ft_pb(datas);
 	printstack(datas);
 	ft_pa(datas);
 	printstack(datas);
@@ -137,25 +123,21 @@ int	test_operations(t_datas *datas)
 int	main(int argc, char **argv)
 {
 	t_datas datas;
-	int error;
 
 	datas.a.head = NULL;
 	datas.b.head = NULL;
 	datas.b.size = 0;
 	ft_memset(&datas, 0, sizeof(t_datas));
 	if (argc < 2)
-		return (error_case(&datas, 1));
-	error = manage_args(argc, argv, &datas);
-	if (error > 0 && error != 7)
-		return (error_case(&datas, error));
-	error = init_a(&datas);
-	if (error > 0)
-		return (error_case(&datas, error));
+		error_case(&datas, 1);
+	manage_args(argc, argv, &datas);
+	
+	init_a(&datas);
 	printstack(&datas);
 
-	error = push_swap(&datas);
-	if (error > 0)
-		return (error_case(&datas, error));
+	push_swap(&datas);
+	//if (error > 0)
+	//	return (error_case(&datas, error));
 	printstack(&datas);
 	
 	//test_operations(&datas);

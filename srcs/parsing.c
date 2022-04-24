@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 00:36:47 by user42            #+#    #+#             */
-/*   Updated: 2022/04/10 12:57:51 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 05:53:16 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,32 +68,31 @@ int	check_str(char **tab, int i)
 	return (0);
 }
 
-int	case_arg_str(t_datas *datas)
+void	case_arg_str(t_datas *datas)
 {
 	int		error;
 	char	**split_str;
 
 	split_str = ft_split(datas->argv[1], ' ');
 	if (!split_str)
-		return (4);
+		error_case(datas, 4);
 	datas->nb_elem = count_elem(split_str);
 	error = check_str(split_str, 0);
 	if (error > 0)
 	{
 		free_matrice(split_str);
-		return (error);
+		error_case(datas, 3);
 	}
 	datas->tab = atoi_args(datas, split_str);
 	if (!datas->tab)
 	{
 		free_matrice(split_str);
-		return (4);
+		error_case(datas, 4);
 	}
 	free_matrice(split_str);
-	return (0);
 }
 
-int	case_arg_list(t_datas *datas)
+void	case_arg_list(t_datas *datas)
 {
 	int	j;
 	int	error;
@@ -101,15 +100,14 @@ int	case_arg_list(t_datas *datas)
 	datas->nb_elem = datas->argc - 1;
 	error = check_str(datas->argv, 1);
 	if (error > 0)
-		return (error);
+		error_case(datas, 3);
 	j = 0;
 	datas->tab = malloc(sizeof(long long int) * datas->nb_elem);
 	if (!(datas->tab))
-		return (4);
+		error_case(datas, 4);
 	while (j < (datas->nb_elem))
 	{
 		datas->tab[j] = ft_atoll(datas->argv[j + 1]);
 		j++;
 	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 05:11:30 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 05:57:06 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	error_case(t_datas *datas, unsigned int error_code)
 	if (error_code == 1)
 		write (STDERR_FILENO, "Not enough arguments\n", 22);
 	if (error_code == 2)
-		write (STDERR_FILENO, "Overflow / Underflow\n", 22);
+		write (STDERR_FILENO, "Overflow\n", 10);
 	if (error_code == 3)
 		write (STDERR_FILENO, "Invalid parameter(s)\n", 22);
 	if (error_code == 4)
@@ -51,7 +51,7 @@ int	found_dup(t_datas *datas, long long int *save, int nb, int i)
 	return (0);
 }
 
-int	check_duplicates(t_datas *datas)
+void	check_duplicates(t_datas *datas)
 {
 	long long int		*save;
 	int					i;
@@ -59,21 +59,20 @@ int	check_duplicates(t_datas *datas)
 	i = 0;
 	save = ft_llintabdup(datas->tab, datas->nb_elem);
 	if (!save)
-		return (4);
+		error_case(datas, 4);;
 	while (i < datas->nb_elem)
 	{
 		if (found_dup(datas, save, datas->tab[i], i) == 1)
 		{
 			free (save);
-			return (5);
+			error_case(datas, 5);
 		}
 		i++;
 	}
 	free (save);
-	return (0);
 }
 
-int	check_not_integer(t_datas *datas)
+void	check_not_integer(t_datas *datas)
 {
 	int	i;
 
@@ -83,22 +82,7 @@ int	check_not_integer(t_datas *datas)
 		if (datas->tab[i] >= -2147483648 && datas->tab[i] <= 2147483647)
 			i++;
 		else
-			return (2);
+			error_case(datas, 2);;
 	}
-	return (0);
 }
 
-/*
-** Check if 
-** the int tab created from the arguments 
-** contain duplicates or over/underflows.
-*/
-
-int	check_error(t_datas *datas)
-{
-	if (check_duplicates(datas) > 0)
-		return (5);
-	if (check_not_integer(datas) > 0)
-		return (2);
-	return (0);
-}

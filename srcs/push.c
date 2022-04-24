@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 17:57:16 by salimon           #+#    #+#             */
-/*   Updated: 2022/04/17 23:34:33 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 05:23:55 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,43 @@
 /* Take the first element at the top of b and put it at the top of a.
 Do nothing if b is empty */
 
-int	ft_pa(t_datas *datas)
+void	ft_pa(t_datas *datas)
 {
 	if (datas->b.head == NULL)
-		return (0);
+		return ;
 	if (datas->a.head == NULL)
 	{
 		if (!append(&datas->a.head, &datas->a.last, datas->b.head->nb))
-			return (4);
+			error_case(datas, 4);
 	}
 	else
 	{
 		if (!push(&datas->a.head, datas->b.head->nb))
-			return (4);
+			error_case(datas, 4);
 	}
 	datas->a.size += 1;
 	datas->b.size -= 1;
 	delete_node(&datas->b.head);
 	write(1, "pa\n", 4);
-	return (0);
 }
 
 /* Same but reversed */
 
-int	ft_pb(t_datas *datas)
+void	ft_pb(t_datas *datas)
 {
 	if (datas->a.head == NULL)
-		return (0);
+		return ;
 	if (datas->b.head == NULL)
 	{
 		//printf("append b\n");
 		if (!append(&datas->b.head, &datas->b.last, datas->a.head->nb))
-			return (4);
+			error_case(datas, 4);
 	}
 	else
 	{
 		//printf("push b\n");
 		if (!push(&datas->b.head, datas->a.head->nb))
-			return (4);
+			error_case(datas, 4);
 	}
 	datas->a.size -= 1;
 	datas->b.size += 1;
@@ -60,5 +59,4 @@ int	ft_pb(t_datas *datas)
     //printf("last b : %lld\n", datas->b.last->nb);
 	delete_node(&datas->a.head);
 	write(1, "pb\n", 4);
-	return (0);
 }
