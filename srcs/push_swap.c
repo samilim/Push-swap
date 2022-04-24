@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 06:04:02 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 08:37:51 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void printstack(t_datas	*datas)
 	t_elem *tmp;
 
 	tmp = datas->a.head;
-    printf("\na actually :\n");
+    printf("\na :\n");
     while (tmp != NULL) {
         printf("%lld ", tmp->nb);
         tmp = tmp->next;
@@ -72,13 +72,13 @@ void printstack(t_datas	*datas)
     //     printf("%lld ", datas->a.last->nb);
     //     datas->a.last = datas->a.last->prev;
 	// }
-	// tmp = datas->b.head;
-	// printf("\nb in forward direction (top to bottom of the list)\n");
-    // while (tmp != NULL) {
-    //     printf("%lld ", tmp->nb);
-    //     //datas->b.last = tmp;
-    //     tmp = tmp->next;
-    // }
+	tmp = datas->b.head;
+	printf("\nb :\n");
+    while (tmp != NULL) {
+        printf("%lld ", tmp->nb);
+        //datas->b.last = tmp;
+        tmp = tmp->next;
+    }
 	printf("\n\n\n");
 }
 
@@ -93,27 +93,27 @@ int	test_operations(t_datas *datas)
 	printstack(datas);
 	ft_pa(datas);
 	printstack(datas);
-	ft_sa(datas, 0);
+	ft_sa(datas, 1);
 	printstack(datas);
-	ft_sa(datas, 0);
+	ft_sa(datas, 1);
 	printstack(datas);
-	ft_sb(datas, 0);
+	ft_sb(datas, 1);
 	printstack(datas);
 	ft_ss(datas);
 	printstack(datas);
-	ft_ra(datas, 0);
+	ft_ra(datas, 1);
 	printstack(datas);
-	ft_ra(datas, 0);
+	ft_ra(datas, 1);
 	printstack(datas);
-	ft_rb(datas, 0);
+	ft_rb(datas, 1);
 	printstack(datas);
 	ft_rr(datas);
 	printstack(datas);
-	ft_rra(datas, 0);
+	ft_rra(datas, 1);
 	printstack(datas);
-	ft_rra(datas, 0);
+	ft_rra(datas, 1);
 	printstack(datas);
-	ft_rrb(datas, 0);
+	ft_rrb(datas, 1);
 	printstack(datas);
 	ft_rrr(datas);
 	printstack(datas);

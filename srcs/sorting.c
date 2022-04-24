@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 06:01:33 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 08:41:08 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int    push_up_to_median(t_datas *datas)
                     ft_rr(datas);
             }
             else
-                ft_ra(datas, 0);
+                ft_ra(datas, 1);
         }
     }
     // printf("head a : %lld\n", datas->a.head->nb);
@@ -118,10 +118,69 @@ int    push_up_to_median(t_datas *datas)
 }
 
 
+
+void sort_three(t_datas *datas)
+{
+    while (!(datas->a.head->nb < datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb))
+    {
+        if (datas->a.head->nb > datas->a.last->nb && datas->a.last->nb < datas->a.head->next->nb && datas->a.head->nb < datas->a.head->next->nb)
+        {
+            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
+                ft_rrr(datas);
+            else
+                ft_rra(datas, 1);
+        }
+        else if (datas->a.head->nb > datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb && datas->a.head->nb > datas->a.last->nb)
+        {
+            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
+                ft_rr(datas);
+            else
+                ft_ra(datas, 1);
+        }
+        else
+        {
+            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
+                ft_ss(datas);
+            else
+                ft_sa(datas, 1);
+        }
+    }
+}
+
+void sort_five(t_datas *datas)
+{
+    int pb;
+
+    pb= 0;
+    //printstack(datas);
+    while (pb < 2)
+    {
+        if (datas->a.last->nb == datas->min || datas->a.last->nb == datas->tab[1])
+        {
+            ft_rra(datas, 1);
+            ft_pb(datas);
+            pb++;
+        }
+        else if (datas->a.head->nb == datas->min || datas->a.head->nb == datas->tab[1])
+        {
+            ft_pb(datas);
+            pb++;
+        }
+        else
+            ft_ra(datas, 1);
+    }
+    sort_three(datas);
+    ft_pa(datas);
+    ft_pa(datas);
+    if (datas->a.head->nb > datas->a.head->next->nb)
+        ft_sa(datas, 1);
+}
+
+
 /*
     Push all nb in the stack b except min max and median
 */
-int    push_to_b(t_datas *datas)
+void    push_to_b(t_datas *datas)
 {
     int i = 0;
     while (i < (datas->nb_elem - 3))
@@ -138,14 +197,14 @@ int    push_to_b(t_datas *datas)
                     ft_rr(datas);
             }
             else
-                ft_ra(datas, 0);
+                ft_ra(datas, 1);
         }
     }
+    sort_three(datas);
     // printf("head a : %lld\n", datas->a.head->nb);
     // printf("last a : %lld\n", datas->a.last->nb);
     // printf("head b : %lld\n", datas->b.head->nb);
     // printf("last b : %lld\n", datas->b.last->nb);
-    return (0);
 }
 
 /* Obtain tab of the sorted arguments */
@@ -184,63 +243,6 @@ int    sort_tab(t_datas *datas)
     return (sorted);
 }
 
-void sort_three(t_datas *datas)
-{
-    while (!(datas->a.head->nb < datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb))
-    {
-        if (datas->a.head->nb > datas->a.last->nb && datas->a.last->nb < datas->a.head->next->nb && datas->a.head->nb < datas->a.head->next->nb)
-        {
-            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
-                ft_rrr(datas);
-            else
-                ft_rra(datas, 0);
-        }
-        else if (datas->a.head->nb > datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb && datas->a.head->nb > datas->a.last->nb)
-        {
-            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
-                ft_rr(datas);
-            else
-                ft_ra(datas, 0);
-        }
-        else
-        {
-            if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
-                ft_ss(datas);
-            else
-                ft_sa(datas, 0);
-        }
-    }
-}
-
-void sort_five(t_datas *datas)
-{
-    int pb;
-
-    pb= 0;
-    //printstack(datas);
-    while (pb < 2)
-    {
-        if (datas->a.last->nb == datas->min || datas->a.last->nb == datas->tab[1])
-        {
-            ft_rra(datas, 0);
-            ft_pb(datas);
-            pb++;
-        }
-        else if (datas->a.head->nb == datas->min || datas->a.head->nb == datas->tab[1])
-        {
-            ft_pb(datas);
-            pb++;
-        }
-        else
-            ft_ra(datas, 0);
-    }
-    sort_three(datas);
-    ft_pa(datas);
-    ft_pa(datas);
-    if (datas->a.head->nb > datas->a.head->next->nb)
-        ft_sa(datas, 0);
-}
-
 void	push_swap(t_datas *datas)
 {
     //int i;
@@ -263,6 +265,6 @@ void	push_swap(t_datas *datas)
         sort_three(datas);
     if (datas->nb_elem == 5 && !check_sort(datas->a)/*sort_tab(datas)*/) /* 3 4 5 1 2 */
         sort_five(datas);
-    // else
-    //     push_to_b(datas);
+    else
+        push_to_b(datas);
 }

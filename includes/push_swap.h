@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 05:55:36 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 08:35:13 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void			clear_list(t_stack *stack);
 /* operations */
 void				ft_pa(t_datas *datas);
 void				ft_pb(t_datas *datas);
-void				ft_sa(t_datas *datas, int ss);
-void				ft_sb(t_datas *datas, int ss);
+void				ft_sa(t_datas *datas, int print);
+void				ft_sb(t_datas *datas, int print);
 void				ft_ss(t_datas *datas);
-void				ft_ra(t_datas *datas, int rr);
-void				ft_rb(t_datas *datas, int rr);
+void				ft_ra(t_datas *datas, int print);
+void				ft_rb(t_datas *datas, int print);
 void				ft_rr(t_datas *datas);
-void				ft_rra(t_datas *datas, int rrr);
-void    			ft_rrb(t_datas *datas, int rrr);
+void				ft_rra(t_datas *datas, int print);
+void    			ft_rrb(t_datas *datas, int print);
 void				ft_rrr(t_datas *datas);
 int				append(struct s_elem **head_ref,
 					struct s_elem **last_ref, long long int new_data);

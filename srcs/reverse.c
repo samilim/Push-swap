@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 04:33:32 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 05:21:45 by salimon          ###   ########.fr       */
+/*   Updated: 2022/04/24 08:36:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* (reverse rotate ): Shift down all elements of the stack by 1.
 The last element becomes the first one */
 
-void	ft_rra(t_datas *datas, int rrr)
+void	ft_rra(t_datas *datas, int print)
 {
 	t_elem	*tmp;
 
@@ -27,11 +27,11 @@ void	ft_rra(t_datas *datas, int rrr)
 	delete_node(&datas->a.last);
 	datas->a.last = tmp;
 	datas->a.last->next = NULL;
-	if (!rrr)
+	if (print)
 		write(1, "rra\n", 4);
 }
 
-void	ft_rrb(t_datas *datas, int rrr)
+void	ft_rrb(t_datas *datas, int print)
 {
 	t_elem	*tmp;
 
@@ -43,7 +43,7 @@ void	ft_rrb(t_datas *datas, int rrr)
 	delete_node(&datas->b.last);
 	datas->b.last = tmp;
 	datas->b.last->next = NULL;
-	if (!rrr)
+	if (print)
 		write(1, "rrb\n", 4);
 }
 
@@ -52,7 +52,7 @@ void	ft_rrr(t_datas *datas)
 	if ((datas->a.head == NULL || datas->a.head->next == NULL)
 		|| (datas->b.head == NULL || datas->b.head->next == NULL))
 		return ;
-	ft_rra(datas, 1);
-	ft_rrb(datas, 1);
+	ft_rra(datas, 0);
+	ft_rrb(datas, 0);
 	write(1, "rrr\n", 4);
 }
