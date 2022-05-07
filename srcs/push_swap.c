@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 08:37:51 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/07 10:22:49 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	manage_args(int argc, char **argv, t_datas *datas)
 {
 	datas->argc = argc;
 	datas->argv = argv;
+	datas->move_count = 0;
 	if (argc == 2) //cas str 
 		case_arg_str(datas);
 	else //cas ints ; place tous les arguments dans un tableau d'int
@@ -54,7 +55,7 @@ void	manage_args(int argc, char **argv, t_datas *datas)
 	*/
 	check_duplicates(datas);
 	check_not_integer(datas);
-	printf("NO ERROR\n");
+	//printf("NO ERROR\n");
 }
 
 void printstack(t_datas	*datas)
@@ -128,17 +129,19 @@ int	main(int argc, char **argv)
 	datas.b.head = NULL;
 	datas.b.size = 0;
 	ft_memset(&datas, 0, sizeof(t_datas));
+	if (!argv[1][0])
+		error_case(&datas, 3);
 	if (argc < 2)
 		error_case(&datas, 1);
 	manage_args(argc, argv, &datas);
 	
 	init_a(&datas);
-	printstack(&datas);
+	//printstack(&datas);
 
 	push_swap(&datas);
 	//if (error > 0)
 	//	return (error_case(&datas, error));
-	printstack(&datas);
+	//printstack(&datas);
 	
 	//test_operations(&datas);
 	//printstack(&datas);

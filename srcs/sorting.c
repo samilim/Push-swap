@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 08:41:08 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/07 10:06:02 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int     check_sort(t_stack stack)
             return (0);
         tmp = tmp->next;
     }
-    printf("a is sorted\n");
+    //printf("a is sorted\n");
     return (1);
 }
 
@@ -177,6 +177,46 @@ void sort_five(t_datas *datas)
 }
 
 
+void sort_stack(t_datas *datas)
+{
+    //printf("\n\n\n\n\n");
+    while (datas->b.head != NULL) //tant que stack b pas vide, on trie
+    {
+        //printstack(datas);
+        //head b
+        if (datas->b.head->nb < datas->median)
+        {
+            while (datas->b.head->nb > datas->a.head->nb)
+            {
+                ft_ra(datas, 1);
+                datas->move_count++;
+            }
+            ft_pa(datas);
+            while (datas->move_count-- > 0)
+                ft_rra(datas, 1);
+        }
+        else
+        {
+            while (datas->b.head->nb < datas->a.last->nb)
+            {
+                ft_rra(datas, 1);
+                datas->move_count++;
+            }
+            ft_pa(datas);
+            //printf ("mc = %d\n", datas->move_count);
+            while (datas->move_count > 0)
+            {
+                ft_ra(datas, 1);
+                datas->move_count--;
+            }
+            ft_ra(datas, 1);
+        }
+        datas->move_count = 0;
+        //last b
+    }    
+}
+
+
 /*
     Push all nb in the stack b except min max and median
 */
@@ -201,6 +241,7 @@ void    push_to_b(t_datas *datas)
         }
     }
     sort_three(datas);
+    sort_stack(datas);
     // printf("head a : %lld\n", datas->a.head->nb);
     // printf("last a : %lld\n", datas->a.last->nb);
     // printf("head b : %lld\n", datas->b.head->nb);
@@ -265,6 +306,6 @@ void	push_swap(t_datas *datas)
         sort_three(datas);
     if (datas->nb_elem == 5 && !check_sort(datas->a)/*sort_tab(datas)*/) /* 3 4 5 1 2 */
         sort_five(datas);
-    else
+    if (!check_sort(datas->a))
         push_to_b(datas);
 }

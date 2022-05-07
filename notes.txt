@@ -14,7 +14,14 @@ algo de tri
 bonus
 
 
+
+
+comp
+make && ARG="1 2 3 4 5" valgrind --leak-check=full --track-origins=yes ./push_swap $ARG | ./checker $ARG && ./push_swap $ARG | wc -l
+
+
 ressources interessantes :
+https://www.calculatorsoup.com/calculators/statistics/random-number-generator.php
 https://github.com/AdrianWR/push_swap
 https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a
 

@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 05:57:06 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/07 09:27:37 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	error_case(t_datas *datas, unsigned int error_code)
 		free(datas->tab);
 	clear_list(&datas->a);
 	clear_list(&datas->b);
-	//return (error_code);
 	exit(EXIT_FAILURE);
 }
 
