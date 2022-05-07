@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 04:15:03 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 08:43:11 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/07 10:45:13 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_sa(t_datas *datas, int print)
 	datas->a.head->nb = datas->a.head->next->nb;
 	datas->a.head->next->nb = swap;
 	if (print)
-		write(1, "sa\n", 4);
+		write(1, "sa\n", 3);
 }
 
 void	ft_sb(t_datas *datas, int print)
@@ -38,7 +38,7 @@ void	ft_sb(t_datas *datas, int print)
 	datas->b.head->nb = datas->b.head->next->nb;
 	datas->b.head->next->nb = swap;
 	if (print)
-		write(1, "sb\n", 4);
+		write(1, "sb\n", 3);
 }
 
 /* sa and sb at the same time */
@@ -50,5 +50,5 @@ void	ft_ss(t_datas *datas)
 		return ;
 	ft_sa(datas, 0);
 	ft_sb(datas, 0);
-	write(1, "ss\n", 4);
+	write(1, "ss\n", 3);
 }
