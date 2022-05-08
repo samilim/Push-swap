@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 17:57:16 by salimon           #+#    #+#             */
-/*   Updated: 2022/05/07 10:44:24 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/07 10:49:40 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ void	ft_pb(t_datas *datas)
 		return ;
 	if (datas->b.head == NULL)
 	{
-		//printf("append b\n");
 		if (!append(&datas->b.head, &datas->b.last, datas->a.head->nb))
 			error_case(datas, 4);
 	}
 	else
 	{
-		//printf("push b\n");
 		if (!push(&datas->b.head, datas->a.head->nb))
 			error_case(datas, 4);
 	}

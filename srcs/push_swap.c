@@ -6,17 +6,9 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/07 10:22:49 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/08 03:23:58 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-/*
-make && valgrind --leak-check=full --track-origins=yes ./push_swap "5 2 6 9 +66661"
-gcc -Wall -Wextra -Werror -g3 -fsanitize=address
-make && valgrind --leak-check=full --track-origins=yes ./push_swap 5 2 6 +94564 55 -9 -3 12 -2 0
-make && valgrind --leak-check=full --track-origins=yes ./push_swap 5 2 6 +94564 55 -9 -3 12 -2 13 16 59 75 96 100 41 36 22 11 66 -78
-*/
 
 #include "../includes/push_swap.h"
 
@@ -44,81 +36,24 @@ void	manage_args(int argc, char **argv, t_datas *datas)
 	datas->argc = argc;
 	datas->argv = argv;
 	datas->move_count = 0;
-	if (argc == 2) //cas str 
+	if (argc == 2)
 		case_arg_str(datas);
-	else //cas ints ; place tous les arguments dans un tableau d'int
+	else
 		case_arg_list(datas);
-	/*
-	** Check if 
-	** the int tab created from the arguments 
-	** contain duplicates or over/underflows.
-	*/
 	check_duplicates(datas);
 	check_not_integer(datas);
-	//printf("NO ERROR\n");
 }
 
-void printstack(t_datas	*datas)
+void	push_swap(t_datas *datas)
 {
-	t_elem *tmp;
-
-	tmp = datas->a.head;
-    printf("\na :\n");
-    while (tmp != NULL) {
-        printf("%lld ", tmp->nb);
-        tmp = tmp->next;
-    }
-	// printf("\na in reverse direction \n");
-	// while (datas->a.last != NULL) {
-    //     printf("%lld ", datas->a.last->nb);
-    //     datas->a.last = datas->a.last->prev;
-	// }
-	tmp = datas->b.head;
-	printf("\nb :\n");
-    while (tmp != NULL) {
-        printf("%lld ", tmp->nb);
-        //datas->b.last = tmp;
-        tmp = tmp->next;
-    }
-	printf("\n\n\n");
-}
-
-int	test_operations(t_datas *datas)
-{
-	ft_pb(datas);
-	ft_pb(datas);
-	ft_pb(datas);
-	ft_pb(datas);
-	ft_pb(datas);
-	ft_pb(datas);
-	printstack(datas);
-	ft_pa(datas);
-	printstack(datas);
-	ft_sa(datas, 1);
-	printstack(datas);
-	ft_sa(datas, 1);
-	printstack(datas);
-	ft_sb(datas, 1);
-	printstack(datas);
-	ft_ss(datas);
-	printstack(datas);
-	ft_ra(datas, 1);
-	printstack(datas);
-	ft_ra(datas, 1);
-	printstack(datas);
-	ft_rb(datas, 1);
-	printstack(datas);
-	ft_rr(datas);
-	printstack(datas);
-	ft_rra(datas, 1);
-	printstack(datas);
-	ft_rra(datas, 1);
-	printstack(datas);
-	ft_rrb(datas, 1);
-	printstack(datas);
-	ft_rrr(datas);
-	printstack(datas);
-	return (0);
+    //printf("nb arg = %d\n", datas->nb_elem);
+    sorted_tab(datas);
+    if (datas->nb_elem == 3)
+        sort_three(datas);
+    if (datas->nb_elem == 5 && !check_sort(datas->a))
+        sort_five(datas);
+    if (!check_sort(datas->a))
+        sort_bigger_stack(datas);
 }
 
 int	main(int argc, char **argv)
@@ -134,18 +69,10 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		error_case(&datas, 1);
 	manage_args(argc, argv, &datas);
-	
 	init_a(&datas);
 	//printstack(&datas);
-
 	push_swap(&datas);
-	//if (error > 0)
-	//	return (error_case(&datas, error));
 	//printstack(&datas);
-	
-	//test_operations(&datas);
-	//printstack(&datas);
-	
 	clear_list(&datas.a);
 	clear_list(&datas.b);
 	free(datas.tab);

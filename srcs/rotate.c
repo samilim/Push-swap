@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 05:37:37 by user42            #+#    #+#             */
-/*   Updated: 2022/04/24 08:39:30 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/07 10:59:02 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_rb(t_datas *datas, int print)
 	if (datas->b.head == NULL || datas->b.head->next == NULL)
 		return ;
 	if (!append(&datas->b.head, &datas->b.last, datas->b.head->nb))
-		error_case(datas, 4);;
+		error_case(datas, 4);
 	delete_node(&datas->b.head);
 	if (print)
 		write(1, "rb\n", 3);

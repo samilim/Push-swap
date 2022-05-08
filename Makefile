@@ -27,6 +27,7 @@ SRCS 		= srcs/push_swap.c \
 			srcs/reverse.c \
 			srcs/clear.c \
 			srcs/stack_management.c \
+			srcs/utils.c \
 
 SRCS_BONUS				= push_swap_bonus.c \
 						check_error_bonus.c \

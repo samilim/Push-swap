@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/05/07 09:27:37 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/07 10:58:00 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	check_duplicates(t_datas *datas)
 	i = 0;
 	save = ft_llintabdup(datas->tab, datas->nb_elem);
 	if (!save)
-		error_case(datas, 4);;
+		error_case(datas, 4);
 	while (i < datas->nb_elem)
 	{
 		if (found_dup(datas, save, datas->tab[i], i) == 1)
@@ -81,7 +81,6 @@ void	check_not_integer(t_datas *datas)
 		if (datas->tab[i] >= -2147483648 && datas->tab[i] <= 2147483647)
 			i++;
 		else
-			error_case(datas, 2);;
+			error_case(datas, 2);
 	}
 }
-
