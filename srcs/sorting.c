@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/05/08 04:57:03 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/09 04:57:17 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,48 @@ void sort_five(t_datas *datas)
 		ft_sa(datas, 1);
 }
 
+//OLD
+// void inferior_to_median(t_datas *datas)
+// {
+// 	if (datas->b.head->nb < datas->median)
+// 	{
+// 		while (datas->b.head->nb > datas->a.head->nb)
+// 		{
+// 			if (datas->b.head->nb < datas->b.last->nb)
+// 				ft_rr(datas);
+// 			else
+// 				ft_ra(datas, 1);
+// 			datas->move_count++;
+// 		}
+// 		ft_pa(datas);
+// 		while (datas->b.head != NULL && datas->b.head->nb < datas->median && datas->b.head->nb < datas->a.head->nb && datas->b.head->nb > datas->a.last->nb)
+// 			ft_pa(datas);
+// 		// atas->move_count++;
+// 	}
+// 	while (datas->move_count-- > 0)
+// 	{
+// 		// if (datas->b.head != NULL && datas->b.head->next != NULL && datas->b.head->nb < datas->b.last->nb)
+// 		//     ft_rrr(datas);
+// 		// else
+// 		ft_rra(datas, 1);
+// 	}
+// 	datas->move_count = 0;
+// }
+
 void inferior_to_median(t_datas *datas)
 {
-	if (datas->b.head->nb < datas->median)
+	while (datas->b.head->nb > datas->a.head->nb)
 	{
-		while (datas->b.head->nb > datas->a.head->nb)
-		{
-			if (datas->b.head->nb < datas->b.last->nb)
-				ft_rr(datas);
-			else
-				ft_ra(datas, 1);
-			datas->move_count++;
-		}
-		ft_pa(datas);
-		while (datas->b.head != NULL && datas->b.head->nb < datas->median && datas->b.head->nb < datas->a.head->nb && datas->b.head->nb > datas->a.last->nb)
-			ft_pa(datas);
-		// atas->move_count++;
+		// if (datas->b.head->nb < datas->b.last->nb)
+		// 	ft_rr(datas);
+		// else
+			ft_ra(datas, 1);
+		datas->move_count++;
 	}
+	ft_pa(datas);
+	while (datas->b.head != NULL && datas->b.head->nb < datas->median && datas->b.head->nb < datas->a.head->nb && datas->b.head->nb > datas->a.last->nb)
+		ft_pa(datas);
+	// atas->move_count++;
 	while (datas->move_count-- > 0)
 	{
 		// if (datas->b.head != NULL && datas->b.head->next != NULL && datas->b.head->nb < datas->b.last->nb)
@@ -93,6 +118,28 @@ void inferior_to_median(t_datas *datas)
 		ft_rra(datas, 1);
 	}
 	datas->move_count = 0;
+}
+
+void superior_to_median(t_datas *datas)
+{
+	while (datas->b.head->nb < datas->a.last->nb)
+	{
+		// if (datas->b.head->nb < datas->b.last->nb)
+		// 	ft_rrr(datas);
+		// else
+			ft_rra(datas, 1);
+		datas->move_count++;
+	}
+	ft_pa(datas);
+	while (datas->b.head != NULL && datas->b.head->nb > datas->median && datas->b.head->nb > datas->a.head->nb && datas->b.head->nb < datas->a.last->nb)
+		ft_pa(datas);
+	// printf ("mc = %d\n", datas->move_count);
+	while (datas->move_count > 0)
+	{
+		ft_ra(datas, 1);
+		datas->move_count--;
+	}
+	ft_ra(datas, 1);
 }
 
 long long int *stack_to_tab(t_stack a, int size)
@@ -113,55 +160,185 @@ long long int *stack_to_tab(t_stack a, int size)
 	return (tab);
 }
 
-void best_move(t_datas *datas)
-{
-	long long int *actual_a;
 
-	actual_a = stack_to_tab(datas->a, datas->a.size);
-	free (actual_a);
-}
-
-void superior_to_median(t_datas *datas)
+void	head_count(t_datas *datas, long long int *actual_a, long long int *actual_b)
 {
-	while (datas->b.head->nb < datas->a.last->nb)
+	int i;
+	int j;
+	int count;
+	int iter;
+
+	iter = 0;
+	j = 0;
+	datas->best_move[0] = 1;
+	while (iter < datas->best_move[0] && j < datas->b.size / 2)
 	{
-		if (datas->b.head->nb < datas->b.last->nb)
-			ft_rrr(datas);
+		count = 1; //push
+		if (actual_b[j] < datas->median)
+		{
+			i = 0;
+			while (i < datas->a.size && actual_b[j] > actual_a[i])
+			{
+				i++;
+				count++;
+			}
+			if (iter == 0 || count < datas->best_move[0])
+			{
+				datas->best_move[0] = count;
+				datas->best_move[1] = j;
+			}
+		}
 		else
-			ft_rra(datas, 1);
-		datas->move_count++;
+		{
+			i = datas->a.size - 1;
+			while (i >= 0 && actual_b[j] < actual_a[i])
+			{
+				i--;
+				count++;
+			}
+			if (iter == 0 || count < datas->best_move[0])
+			{
+				datas->best_move[0] = count;
+				datas->best_move[1] = j;
+			}
+		}
+		j++;
+		iter++;
 	}
-	ft_pa(datas);
-	while (datas->b.head != NULL && datas->b.head->nb > datas->median && datas->b.head->nb > datas->a.head->nb && datas->b.head->nb < datas->a.last->nb)
-		ft_pa(datas);
-	// printf ("mc = %d\n", datas->move_count);
-	while (datas->move_count > 0)
-	{
-		ft_ra(datas, 1);
-		datas->move_count--;
-	}
-	ft_ra(datas, 1);
 }
+
+void	tail_count(t_datas *datas, long long int *actual_a, long long int *actual_b)
+{
+	int i;
+	int j;
+	int count;
+	int iter;
+
+	iter = 0;
+	j = datas->b.size - 1;
+	while (iter < datas->best_move[0] && j >= datas->b.size / 2)
+	{
+		count = 2; //push rrb
+		if (actual_b[j] < datas->median)
+		{
+			i = 0;
+			while (i < datas->a.size && actual_b[j] > actual_a[i])
+			{
+				i++;
+				count++;
+			}
+			if (count < datas->best_move[0])
+			{
+				datas->best_move[0] = count;
+				datas->best_move[1] = j;
+			}
+		}
+		else
+		{
+			i = datas->a.size - 1;
+			while (i >= 0 && actual_b[j] < actual_a[i])
+			{
+				i--;
+				count++;
+			}
+			if (count < datas->best_move[0])
+			{
+				datas->best_move[0] = count;
+				datas->best_move[1] = j;
+			}
+		}
+		j--;
+		iter++;
+	}
+}
+
+/*
+** Obtain the index of the obtimal nb to push in a. recuperer tab de b et si i < moitie lire parle haut, sinon lire par le bas
+*/
+void get_best_move(t_datas *datas, long long int *actual_a, long long int *actual_b)
+{
+	//long long int *actual_a;
+	//long long int *actual_b;
+
+	//actual_a = stack_to_tab(datas->a, datas->a.size);
+	//actual_b = stack_to_tab(datas->b, datas->b.size);
+	head_count(datas, actual_a, actual_b);
+	tail_count(datas, actual_a, actual_b);
+	//free (actual_a);
+	//free (actual_b);
+}
+
+
+//OLD
+// void sort_stack(t_datas *datas)
+// {
+// 	// printf("\n\n\n\n\n");
+// 	while (datas->b.head != NULL) // tant que stack b pas vide, on trie
+// 	{
+// 		printstack(datas);
+// 		// head b
+// 		if (datas->b.head->nb < datas->median)
+// 		{
+// 			inferior_to_median(datas);
+// 		}
+// 		else
+// 		{
+// 			superior_to_median(datas);
+// 		}
+// 		datas->move_count = 0;
+// 		// last b
+// 	}
+// }
 
 void sort_stack(t_datas *datas)
 {
 	// printf("\n\n\n\n\n");
-	best_move(datas);
+	long long int *actual_a;
+	long long int *actual_b;
+
+	actual_a = stack_to_tab(datas->a, datas->a.size);
+	actual_b = stack_to_tab(datas->b, datas->b.size);
 	while (datas->b.head != NULL) // tant que stack b pas vide, on trie
 	{
-		// printstack(datas);
+		datas->best_move[0] = 1;
+		get_best_move(datas, actual_a, actual_b);
+		printstack(datas);
 		// head b
-		if (datas->b.head->nb < datas->median)
-		{
+		printf ("best : %lld (index %d)\n", actual_b[datas->best_move[1]], datas->best_move[1]);
+		// if (datas->best_move[1] < datas->b.size/2)
+		// {
+		// 	while (datas->b.head->nb != actual_b[datas->best_move[1]])
+		// 	{
+		// 		if (datas->a.head->nb < actual_b[datas->best_move[1]] && actual_b[datas->best_move[1]] < datas->median)
+		// 		{
+		// 			ft_rr(datas);
+		// 			datas->move_count++;
+		// 		}
+		// 		else
+		// 			ft_rb(datas, 1);
+		// 	}
+		// }
+		// else
+		// {
+		// 	while (datas->b.head->nb != actual_b[datas->best_move[1]])
+		// 	{
+		// 		if (datas->a.last->nb > actual_b[datas->best_move[1]] && actual_b[datas->best_move[1]] > datas->median)
+		// 		{
+		// 			ft_rrr(datas);
+		// 			datas->move_count++;
+		// 		}
+		// 		else
+		// 			ft_rrb(datas, 1);
+		// 	}
+		// }
+		if (actual_b[datas->best_move[1]] < datas->median)
 			inferior_to_median(datas);
-		}
 		else
-		{
 			superior_to_median(datas);
-		}
-		datas->move_count = 0;
 		// last b
 	}
+	free (actual_a);
+	free (actual_b);
 }
 
 /*

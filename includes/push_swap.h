@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/05/08 04:55:56 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/09 04:01:40 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_datas
 	long long int	max;
 	long long int	median;
 	int				move_count;
+	int				best_move[2];
 }				t_datas;
 
 /* parsing */

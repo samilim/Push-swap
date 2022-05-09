@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/08 03:23:58 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/09 00:14:08 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ int	main(int argc, char **argv)
 {
 	t_datas datas;
 
-	datas.a.head = NULL;
-	datas.b.head = NULL;
-	datas.b.size = 0;
+	// datas.a.head = NULL;
+	// datas.b.head = NULL;
+	// datas.b.size = 0;
 	ft_memset(&datas, 0, sizeof(t_datas));
+	if (!argv[1])
+		error_case(&datas, 3);
 	if (!argv[1][0])
 		error_case(&datas, 3);
 	if (argc < 2)
