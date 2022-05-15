@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/05/09 04:01:40 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/15 19:14:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_stack
 
 /*
 ** Structure des stacks
+** best_move[0] = count, [1] = index in b, [2] = index in a
 */
 
 typedef struct s_datas
@@ -57,7 +58,7 @@ typedef struct s_datas
 	long long int	max;
 	long long int	median;
 	int				move_count;
-	int				best_move[2];
+	int				best_move[3];
 }				t_datas;
 
 /* parsing */

@@ -17,12 +17,14 @@ bonus
 
 
 comp
-make && ARG="1 2 3 4 5" valgrind --leak-check=full --track-origins=yes ./push_swap $ARG | ./checker $ARG && ./push_swap $ARG | wc -l
+make && ARG="48 -51 62 89 54 50 -80 37 -78 64 97 -72 65 76 -74 -21 -64 43 33 -34 88 57 91 -18 -25 -8 11 41 -58 -69 -43 0 -95 14 17 -81 42 49 -15 -40 -55 -70 -76 7 -92 -22 -47 -54 -33 30 26 -79 -13 -37 -7 -99 21 -94 10 -84 29 24 -32 -38 13 -30 47 -28 -52 52 -4 85 28 -67 -63 84 -71 19 70 -96 83 99 -31 73 9 12 -62 53 -35 92 -45 72 -97 90 -5 45 -44 100 -42 -41" valgrind --leak-check=full --track-origins=yes ./push_swap $ARG | ./checker $ARG && ./push_swap $ARG | wc -l
 
 make && valgrind --leak-check=full --track-origins=yes ./push_swap "5 2 6 9 +66661"
 gcc -Wall -Wextra -Werror -g3 -fsanitize=address
 make && valgrind --leak-check=full --track-origins=yes ./push_swap 5 2 6 +94564 55 -9 -3 12 -2 0
 make && valgrind --leak-check=full --track-origins=yes ./push_swap 5 2 6 +94564 55 -9 -3 12 -2 13 16 59 75 96 100 41 36 22 11 66 -78
+
+make && ARG="88 -98 39 -33 -67 20 -18 64 73 -91 58 -8 91 14 3 -14 -51 -79 70 85 -19 13 -10 -21 15 -49 -2 56 78 98 30 12 -65 -63 -1 -4 -47 -5 -89 36 2 -29 -57 -35 9 -39 -50 17 97 26 68 46 -24 -52 10 -31 4 92 67 81 5 -32 37 -12 -59 99 -97 -16 -100 -43 50 -86 35 -9 -36 19 71 -68 29 -40 32 84 -93 90 72 -37 -87 -30 -25 -42 43 45 63 -90 48 1 86 -88 -92 47" valgrind --leak-check=full --track-origins=yes ./push_swap $ARG | ./checker $ARG && ./push_swap $ARG | wc -l
 
 ressources interessantes :
 https://www.calculatorsoup.com/calculators/statistics/random-number-generator.php
@@ -70,6 +72,9 @@ exit success au lieu de remonter en cas derreur?
 
 
 next:
+rotate/reverse avant pa
+
+
 corriger le get index dans readhead
 transposerdans readtail
 algo
