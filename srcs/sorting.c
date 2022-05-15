@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/05/16 00:15:23 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/16 00:57:15 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,17 +204,22 @@ void	head_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 	while (rb < datas->best_move[0] && (j < datas->b.size / 2 || datas->b.size == 1)) //tant qu'onne surpasse pas la lecture de head
 	{
 		index_in_a = get_index_in_a(datas, actual_a, actual_b[j]); //obtain index of actual_b[j] in a
-		//printf("index of %lld in a is %d\n", actual_b[j], index_in_a);
+		printf("index of %lld in a is %d\n", actual_b[j], index_in_a);
 		//printf("entre\n\n");
 		count = 1; //push
 		p_bonus = j + 1;
-		if (index_in_a < datas->a.size / 2)
+		if (index_in_a <= datas->a.size / 2) //CASSE
 		{
+			printf("YOOOOOOOOOOOOOOOOOOOOOOO\n");
 			count += index_in_a + rb; //+rb ?
-			while (p_bonus < datas->b.size && actual_b[p_bonus] < actual_b[p_bonus - 1] && actual_b[p_bonus] > actual_a[datas->a.size -1]) //push consecutifs sans rotate
+			if (datas->b.size > 1)
 			{
-				p_bonus++;
-				count--;
+				printf("HEEEEEEEELLLLLLLLLLLLLLLLLLLLLOOOOOOOb size = %d\n", datas->b.size);
+				while (p_bonus < datas->b.size /*&& actual_b[p_bonus] < actual_b[p_bonus - 1] && actual_b[p_bonus] > actual_a[datas->a.size - 1]*/) // push consecutifs sans rotate CASSSE
+				{
+					p_bonus++;
+					count--;
+				}
 			}
 			if (rb == 0 || count < datas->best_move[0])
 			{
@@ -222,6 +227,7 @@ void	head_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 				datas->best_move[1] = j;
 				datas->best_move[2] = index_in_a;
 			}
+			printf("j : %d, count = %d\n", j, count);
 		}
 		else
 		{
@@ -252,7 +258,7 @@ void	tail_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 	int rrb;
 	int index_in_a;
 
-	//printf("tail\n");
+	printf("tail\n");
 	rrb = 1;
 	j = datas->b.size - 1;
 	while (rrb < datas->best_move[0] && j >= datas->b.size / 2)
@@ -347,7 +353,7 @@ void sort_stack(t_datas *datas)
 
 		get_best_move(datas, actual_a, actual_b); //actualise best_move variable to know wich element of b I should push in a
 		
-		//printf ("best : %lld (index b : %d), (index a : %d)\n", actual_b[datas->best_move[1]], datas->best_move[1], datas->best_move[2]);
+		printf ("best : %lld (index b : %d), (index a : %d)\n", actual_b[datas->best_move[1]], datas->best_move[1], datas->best_move[2]);
 		//printf("size a : %d\n", datas->a.size);
 		//printf("size b : %d\n", datas->b.size);
 		

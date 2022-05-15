@@ -73,6 +73,7 @@ exit success au lieu de remonter en cas derreur?
 
 next:
 rotate/reverse avant pa
+quicksort merge sort
 
 
 corriger le get index dans readhead
