@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/05/21 05:35:40 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/21 08:06:36 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_datas
 	t_stack			a;
 	t_stack			b;
 	long long int	*tab;
+	long long int	*tabix[2];
 	int				argc;
 	char			**argv;
 	int				nb_elem;
@@ -75,6 +76,7 @@ void				push_swap(t_datas *datas);
 void				sort_three(t_datas *datas);
 void				sort_five(t_datas *datas);
 void				sort_bigger_stack(t_datas *datas);
+void				radix_sort(t_datas *datas);
 /* utils */
 void				delete_node(struct s_elem **head_re);
 void				clear_list(t_stack *stack);

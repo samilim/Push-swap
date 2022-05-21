@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/21 06:00:45 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/21 07:44:29 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	push_swap(t_datas *datas)
     if (datas->nb_elem == 5 && !check_sort(datas->a))
         sort_five(datas);
     if (!check_sort(datas->a))
-        sort_bigger_stack(datas);
+		radix_sort(datas);
+    //sort_bigger_stack(datas);
 }
 
 int	main(int argc, char **argv)
