@@ -6,67 +6,11 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:21:59 by user42            #+#    #+#             */
-/*   Updated: 2022/05/16 00:57:15 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/21 06:58:15 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void sort_three(t_datas *datas)
-{
-	while (!(datas->a.head->nb < datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb))
-	{
-		if (datas->a.head->nb > datas->a.last->nb && datas->a.last->nb < datas->a.head->next->nb && datas->a.head->nb < datas->a.head->next->nb)
-		{
-			if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
-				ft_rrr(datas);
-			else
-				ft_rra(datas, 1);
-		}
-		else if (datas->a.head->nb > datas->a.head->next->nb && datas->a.head->next->nb < datas->a.last->nb && datas->a.head->nb > datas->a.last->nb)
-		{
-			if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
-				ft_rr(datas);
-			else
-				ft_ra(datas, 1);
-		}
-		else
-		{
-			if (datas->b.head != NULL && datas->b.head->next != NULL && (datas->b.head->nb < datas->b.head->next->nb))
-				ft_ss(datas);
-			else
-				ft_sa(datas, 1);
-		}
-	}
-}
-
-void sort_five(t_datas *datas)
-{
-	int pb;
-
-	pb = 0;
-	while (pb < 2)
-	{
-		if (datas->a.last->nb == datas->min || datas->a.last->nb == datas->tab[1])
-		{
-			ft_rra(datas, 1);
-			ft_pb(datas);
-			pb++;
-		}
-		else if (datas->a.head->nb == datas->min || datas->a.head->nb == datas->tab[1])
-		{
-			ft_pb(datas);
-			pb++;
-		}
-		else
-			ft_ra(datas, 1);
-	}
-	sort_three(datas);
-	ft_pa(datas);
-	ft_pa(datas);
-	if (datas->a.head->nb > datas->a.head->next->nb)
-		ft_sa(datas, 1);
-}
 
 void rotate_to_index(t_datas *datas, long long int *actual_b)
 {
@@ -111,6 +55,8 @@ void reverse_to_index(t_datas *datas, long long int *actual_b)
 
 	i = datas->a.size - 1;
 	//printf("reverse\n");
+	//printf("i = %d\n", i);
+	//printf("bestnb = %lld\n", actual_b[datas->best_move[1]]);
 	while (datas->b.head->nb != actual_b[datas->best_move[1]])
 	{
 		//printf("boucle\n");
@@ -129,8 +75,8 @@ void reverse_to_index(t_datas *datas, long long int *actual_b)
 		ft_rra(datas, 1);
 		datas->move_count++;
 	}
-	if (datas->b.head->next != NULL)
-		ft_rra(datas, 1);
+	//if (datas->b.head->next != NULL)
+	ft_rra(datas, 1);
 	ft_pa(datas);
 	while (datas->b.head != NULL && datas->b.head->nb < datas->a.head->nb && datas->b.head->nb > datas->a.last->nb)
 		ft_pa(datas);
@@ -141,33 +87,6 @@ void reverse_to_index(t_datas *datas, long long int *actual_b)
 	// 	datas->move_count--;
 	// }
 	// ft_ra(datas, 1);
-}
-
-
-
-long long int *stack_to_tab(t_stack a, int size)
-{
-	int i;
-	long long int	*tab;
-	t_stack tmp;
-
-	i = 0;
-	tmp = a;
-	tab = malloc(sizeof(long long int) * size);
-	while (i < size)
-	{
-		tab[i] = tmp.head->nb;
-		tmp.head = tmp.head->next;
-		i++;
-	}
-	// i =0;
-	// while (i < size)
-	// {
-	// 	printf("%lld ", tab[i]);
-	// 	i++;
-	// }
-	// printf("\n");
-	return (tab);
 }
 
 int		get_index_in_a(t_datas *datas, long long int *actual_a, long long int element)
@@ -201,20 +120,29 @@ void	head_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 	rb = 0;
 	j = 0; //lit dans stack b
 	datas->best_move[0] = 1; //count
+	//printf("head count\n");
+	if (datas->b.size == 1)
+	{
+		index_in_a = get_index_in_a(datas, actual_a, actual_b[j]);
+		datas->best_move[0] = -50;
+		datas->best_move[1] = j;
+		datas->best_move[2] = index_in_a;
+	//	printf("last\n");
+	}
 	while (rb < datas->best_move[0] && (j < datas->b.size / 2 || datas->b.size == 1)) //tant qu'onne surpasse pas la lecture de head
 	{
 		index_in_a = get_index_in_a(datas, actual_a, actual_b[j]); //obtain index of actual_b[j] in a
-		printf("index of %lld in a is %d\n", actual_b[j], index_in_a);
+		//printf("index of %lld in a is %d\n", actual_b[j], index_in_a);
 		//printf("entre\n\n");
 		count = 1; //push
 		p_bonus = j + 1;
 		if (index_in_a <= datas->a.size / 2) //CASSE
 		{
-			printf("YOOOOOOOOOOOOOOOOOOOOOOO\n");
+			//printf("YOOOOOOOOOOOOOOOOOOOOOOO\n");
 			count += index_in_a + rb; //+rb ?
 			if (datas->b.size > 1)
 			{
-				printf("HEEEEEEEELLLLLLLLLLLLLLLLLLLLLOOOOOOOb size = %d\n", datas->b.size);
+				//printf("HEEEEEEEELLLLLLLLLLLLLLLLLLLLLOOOOOOOb size = %d\n", datas->b.size);
 				while (p_bonus < datas->b.size /*&& actual_b[p_bonus] < actual_b[p_bonus - 1] && actual_b[p_bonus] > actual_a[datas->a.size - 1]*/) // push consecutifs sans rotate CASSSE
 				{
 					p_bonus++;
@@ -226,8 +154,9 @@ void	head_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 				datas->best_move[0] = count;
 				datas->best_move[1] = j;
 				datas->best_move[2] = index_in_a;
+				//printf("nw best : count %d\n", datas->best_move[0]);
 			}
-			printf("j : %d, count = %d\n", j, count);
+			//printf("head a. j : %d, count = %d\n", j, count);
 		}
 		else
 		{
@@ -242,7 +171,9 @@ void	head_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 				datas->best_move[0] = count;
 				datas->best_move[1] = j;
 				datas->best_move[2] = index_in_a;
+				//printf("nw best : count %d\n", datas->best_move[0]);
 			}
+			//printf("end a. j : %d, count : %d\n", j, count);
 		}
 		j++;
 		rb++;
@@ -258,7 +189,7 @@ void	tail_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 	int rrb;
 	int index_in_a;
 
-	printf("tail\n");
+	//printf("tail\n");
 	rrb = 1;
 	j = datas->b.size - 1;
 	while (rrb < datas->best_move[0] && j >= datas->b.size / 2)
@@ -280,6 +211,7 @@ void	tail_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 				datas->best_move[0] = count;
 				datas->best_move[1] = j;
 				datas->best_move[2] = index_in_a;
+				//printf("nw best : count %d\n", datas->best_move[0]);
 			}
 		}
 		else
@@ -295,6 +227,7 @@ void	tail_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 				datas->best_move[0] = count;
 				datas->best_move[1] = j;
 				datas->best_move[2] = index_in_a;
+				//printf("nw best : count %d\n", datas->best_move[0]);
 			}
 		}
 		j--;
@@ -309,7 +242,7 @@ void	tail_count(t_datas *datas, long long int *actual_a, long long int *actual_b
 void get_best_move(t_datas *datas, long long int *actual_a, long long int *actual_b)
 {
 	head_count(datas, actual_a, actual_b);
-	if (datas->best_move[0] > 1)
+	if (datas->best_move[0] > 1 && datas->b.size > 1)
 		tail_count(datas, actual_a, actual_b);
 }
 
@@ -320,7 +253,7 @@ void get_best_move(t_datas *datas, long long int *actual_a, long long int *actua
 void	rearrange_a(t_datas *datas, long long int *actual_a)
 {
 	int i;
-
+	//printf("rearrange\n");
 	i = 0;
 	while (actual_a[i] != datas->min)
 		i++;
@@ -344,6 +277,15 @@ void sort_stack(t_datas *datas)
 
 	while (datas->b.head != NULL) // tant que stack b pas vide, trie
 	{
+		if(datas->b.size > 2)
+		{	
+			while (datas->b.size > datas->a.size && datas->b.head->nb > datas->median)
+			{
+				ft_rb(datas, 1);
+			}
+			if (datas->b.head->nb < datas->b.head->next->nb)
+				ft_sb(datas, 1);
+		}
 		datas->best_move[0] = 1;
 		//printf("tab a: ");
 		actual_a = stack_to_tab(datas->a, datas->a.size);
@@ -352,12 +294,11 @@ void sort_stack(t_datas *datas)
 		printstack(datas);
 
 		get_best_move(datas, actual_a, actual_b); //actualise best_move variable to know wich element of b I should push in a
-		
-		printf ("best : %lld (index b : %d), (index a : %d)\n", actual_b[datas->best_move[1]], datas->best_move[1], datas->best_move[2]);
+		//printf ("best : %lld (index b : %d), (index a : %d)\n", actual_b[datas->best_move[1]], datas->best_move[1], datas->best_move[2]);
 		//printf("size a : %d\n", datas->a.size);
 		//printf("size b : %d\n", datas->b.size);
 		
-		if (actual_b[datas->best_move[2]] < (datas->a.size / 2)) //si best move dans premier partie de a, rotate
+		if (datas->best_move[2] <= (datas->a.size / 2)) //si best move dans premier partie de a, rotate
 			rotate_to_index(datas, actual_b);
 		else
 			reverse_to_index(datas, actual_b);
@@ -380,7 +321,25 @@ void sort_bigger_stack(t_datas *datas)
 	{
 		if (datas->a.head->nb != datas->median && datas->a.head->nb != datas->min && datas->a.head->nb != datas->max)
 		{
+			printstack(datas);
 			ft_pb(datas);
+				/*500*/
+			if (datas->b.head->next != NULL && datas->b.size > 2)
+			{
+				if (datas->b.head->nb > datas->median)
+				{
+					ft_rb(datas, 1);
+				}
+				else
+				{
+					if (datas->b.head->nb < datas->b.head->next->nb)
+						ft_sb(datas, 1);
+				}
+			}
+				/**/
+			// 	printf ("head = %lld, next = %lld\n", datas->b.head->nb, datas->b.head->next->nb);
+			// if (datas->b.head->next != NULL && datas->b.head->nb < datas->b.head->next->nb)
+			// 	ft_sb(datas, 1);
 			i++;
 		}
 		else
@@ -395,40 +354,4 @@ void sort_bigger_stack(t_datas *datas)
 	}
 	sort_three(datas);
 	sort_stack(datas);
-}
-
-/* Obtain tab of the sorted arguments */
-int sorted_tab(t_datas *datas)
-{
-	int i;
-	int sorted;
-	long long int swp;
-
-	i = 1;
-	sorted = 0;
-	while (i < datas->nb_elem)
-	{
-		if (datas->tab[i] < datas->tab[i - 1])
-		{
-			swp = datas->tab[i];
-			datas->tab[i] = datas->tab[i - 1];
-			datas->tab[i - 1] = swp;
-			sorted = 1;
-			if (i == datas->nb_elem / 2)
-				datas->median = datas->tab[i];
-			i = 0;
-		}
-		i++;
-	}
-	datas->min = datas->tab[0];
-	datas->max = datas->tab[datas->nb_elem - 1];
-	i = 0;
-	// printf("arg sort : ");
-	// while (i < datas->nb_elem)
-	// {
-	//     printf("%lld ", datas->tab[i]);
-	//     i++;
-	// }
-	// printf("\n");
-	return (sorted);
 }

@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/05/15 19:14:48 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/21 05:35:40 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void				delete_node(struct s_elem **head_re);
 void				clear_list(t_stack *stack);
 int					check_sort(t_stack stack);
 int					sorted_tab(t_datas *datas);
+long long int		*stack_to_tab(t_stack a, int size);
 /* operations */
 void				ft_pa(t_datas *datas);
 void				ft_pb(t_datas *datas);
@@ -96,6 +97,7 @@ int					append(struct s_elem **head_ref,
 						struct s_elem **last_ref, long long int new_data);
 int					push(struct s_elem **head_ref, long long int new_data);
 /* others */
+int					sorted_tab(t_datas *datas);
 void				printstack(t_datas	*datas);
 
 #endif

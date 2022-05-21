@@ -5,6 +5,9 @@ questions :
 - message erreur adapte autorise ?
 - si ss, sencée executer sa quand sb impossible ?
 
+
+sia est deja sort, ne rien afficher
+
 correc 
 https://github.com/caecitasminimus/school21-checklists
 

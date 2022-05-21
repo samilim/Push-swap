@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 04:15:03 by user42            #+#    #+#             */
-/*   Updated: 2022/05/07 10:45:13 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/21 06:22:33 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ void	ft_sa(t_datas *datas, int print)
 	if (print)
 		write(1, "sa\n", 3);
 }
+
+// void	ft_sb(t_datas *datas, int print)
+// {
+// 	t_elem	*swap;
+
+// 	if (datas->b.head == NULL || datas->b.head->next == NULL)
+// 		return ;
+// 	swap = datas->b.head;
+// 	datas->b.head = datas->b.head->next;
+// 	datas->b.head->next = swap;
+// 	datas->b.head->next->prev = datas->b.head;
+// 	datas->b.head->prev = NULL;
+// 	if (print)
+// 		write(1, "sb\n", 3);
+// }
 
 void	ft_sb(t_datas *datas, int print)
 {
