@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 05:12:28 by user42            #+#    #+#             */
-/*   Updated: 2022/05/07 10:58:00 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/22 04:14:56 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,31 @@
 /*
 ** Print an error message corresonding to the code error
 */
+// int	error_case(t_datas *datas, unsigned int error_code)
+// {
+// 	if (error_code == 1)
+// 		write (STDERR_FILENO, "Not enough arguments\n", 22);
+// 	if (error_code == 2)
+// 		write (STDERR_FILENO, "Overflow\n", 10);
+// 	if (error_code == 3)
+// 		write (STDERR_FILENO, "Invalid parameter(s)\n", 22);
+// 	if (error_code == 4)
+// 		write (STDERR_FILENO, "Allocation error\n", 18);
+// 	if (error_code == 5)
+// 		write (STDERR_FILENO, "Found a duplicate\n", 19);
+// 	if (error_code == 6)
+// 		write (STDERR_FILENO, "Invalid operation\n", 19);
+// 	if (datas->tab)
+// 		free(datas->tab);
+// 	clear_list(&datas->a);
+// 	clear_list(&datas->b);
+// 	exit(EXIT_FAILURE);
+// }
+
 int	error_case(t_datas *datas, unsigned int error_code)
 {
-	if (error_code == 1)
-		write (STDERR_FILENO, "Not enough arguments\n", 22);
-	if (error_code == 2)
-		write (STDERR_FILENO, "Overflow\n", 10);
-	if (error_code == 3)
-		write (STDERR_FILENO, "Invalid parameter(s)\n", 22);
-	if (error_code == 4)
-		write (STDERR_FILENO, "Allocation error\n", 18);
-	if (error_code == 5)
-		write (STDERR_FILENO, "Found a duplicate\n", 19);
-	if (error_code == 6)
-		write (STDERR_FILENO, "Invalid operation\n", 19);
+	if (error_code)
+		write (STDERR_FILENO, "Error\n", 6);
 	if (datas->tab)
 		free(datas->tab);
 	clear_list(&datas->a);

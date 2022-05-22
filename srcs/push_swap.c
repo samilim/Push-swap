@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/21 07:44:29 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/22 04:35:48 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ void	push_swap(t_datas *datas)
 {
     //printf("nb arg = %d\n", datas->nb_elem);
     sorted_tab(datas);
-    if (datas->nb_elem == 3)
+	if (datas->nb_elem == 2 && !check_sort(datas->a))
+		ft_sa(datas, 1);
+    else if (datas->nb_elem == 3)
         sort_three(datas);
-    if (datas->nb_elem == 5 && !check_sort(datas->a))
+    else if (datas->nb_elem == 5 && !check_sort(datas->a))
         sort_five(datas);
-    if (!check_sort(datas->a))
+    else if (!check_sort(datas->a))
 		radix_sort(datas);
     //sort_bigger_stack(datas);
 }
@@ -61,16 +63,11 @@ int	main(int argc, char **argv)
 {
 	t_datas datas;
 
-	// datas.a.head = NULL;
-	// datas.b.head = NULL;
-	// datas.b.size = 0;
 	ft_memset(&datas, 0, sizeof(t_datas));
+	if (argc < 2 || (argc == 2 && !argv[1][0]))
+		return (0);
 	if (!argv[1])
 		error_case(&datas, 3);
-	if (!argv[1][0])
-		error_case(&datas, 3);
-	if (argc < 2)
-		error_case(&datas, 1);
 	manage_args(argc, argv, &datas);
 	init_a(&datas);
 	//printstack(&datas);

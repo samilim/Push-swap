@@ -6,7 +6,7 @@
 /*   By: salimon <salimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 00:14:24 by user42            #+#    #+#             */
-/*   Updated: 2022/05/21 08:06:36 by salimon          ###   ########.fr       */
+/*   Updated: 2022/05/22 03:26:52 by salimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_elem
 }					t_elem;
 
 /*
-** Structure de données des stacks
+** Structure de navigation des stacks
 */
 
 typedef struct s_stack
@@ -42,7 +42,9 @@ typedef struct s_stack
 }				t_stack;
 
 /*
-** Structure des stacks
+** Struture des stacks
+** tab contains the sorted version of the stacks a
+** tabix is a non sorted version of tab that I use in my radix sort algo
 ** best_move[0] = count, [1] = index in b, [2] = index in a
 */
 
@@ -51,7 +53,7 @@ typedef struct s_datas
 	t_stack			a;
 	t_stack			b;
 	long long int	*tab;
-	long long int	*tabix[2];
+	//long long int	(*tabix)[2];
 	int				argc;
 	char			**argv;
 	int				nb_elem;
